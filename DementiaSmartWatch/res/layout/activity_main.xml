@@ -53,8 +53,7 @@
             android:id="@+id/fullscreen_content_controls"
             style="?metaButtonBarStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
+            android:layout_height="112dp"
             android:background="@color/black_overlay"
             android:orientation="horizontal"
             tools:ignore="UselessParent" >
@@ -62,12 +61,12 @@
             <Button
                 android:id="@+id/dummy_button"
                 style="?metaButtonBarButtonStyle"
-                android:layout_width="0dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="bottom"
                 android:text="@string/dummy_button" />
         </LinearLayout>
+
     </FrameLayout>
 
 </FrameLayout>
