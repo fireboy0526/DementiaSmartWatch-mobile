@@ -19,6 +19,7 @@ import android.widget.Toast;
  * @see SystemUiHider
  */
 public class Main extends Activity {
+	
 	/**
 	 * Whether or not the system UI should be auto-hidden after
 	 * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -101,6 +102,7 @@ public class Main extends Activity {
 							delayedHide(AUTO_HIDE_DELAY_MILLIS);
 						}
 					}
+					
 				});
 
 		// Set up the user interaction to manually show or hide the system UI.
@@ -146,7 +148,7 @@ public class Main extends Activity {
 			return false;
 		}
 	};
-
+	
 	Handler mHideHandler = new Handler();
 	Runnable mHideRunnable = new Runnable() {
 		@Override
