@@ -9,8 +9,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
-//
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -162,5 +162,11 @@ public class Main extends Activity {
 	private void delayedHide(int delayMillis) {
 		mHideHandler.removeCallbacks(mHideRunnable);
 		mHideHandler.postDelayed(mHideRunnable, delayMillis);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		GPSLocation.runGPS(this);
 	}
 }
