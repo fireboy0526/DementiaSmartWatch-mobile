@@ -13,23 +13,17 @@ public class GPSLocation implements LocationListener {
 	private static LocationManager locationManager;
 	private static String provider;
 	private static Criteria criteria;
-	private double gLatitude, gLongitude;
+	private double gLatitude, gLongitude, oldLon, oldLat;
+	private static UniqueID uid;
 
 	public static void runGPS(final Context context) {
 		final GPSLocation gps = new GPSLocation();
+		//UniqueID.setUniqueID(context);
 		gps.start(context);
 		
-		//To continuously get the GPS connection after first load
-		final Handler handler = new Handler();
-		handler.postDelayed(new Runnable() {
-			public void run() {
-				gps.start(context);
-				handler.postDelayed(this, 1000);
-			}
-		},1000);
 	}
 	
-	public void start(Context context) {
+	public void start(final Context context) {
 		 //Getting LocationManager Object
         locationManager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
         
@@ -48,6 +42,15 @@ public class GPSLocation implements LocationListener {
         	if(location != null) {
         		onLocationChanged(location);
         	}
+        	
+        	//To continuously get the GPS connection after first load
+    		final Handler handler = new Handler();
+    		handler.postDelayed(new Runnable() {
+    			public void run() {
+    				start(context);
+    				//handler.postDelayed(this, 1000);
+    			}
+    		},1000);
         } else {
         	Toast.makeText(context, "No Provider Found", Toast.LENGTH_SHORT).show();
         }
@@ -67,9 +70,21 @@ public class GPSLocation implements LocationListener {
 
 	//Run this when location changes
 	public void onLocationChanged(Location location) {
+		boolean changed = false;
 		gLongitude = (double)(location.getLongitude());
 		gLatitude = (double)(location.getLatitude());
-		System.out.println("Lon: " + gLongitude + ", Lan: " + gLatitude);
+		if (oldLon != gLongitude) {
+			oldLon = gLongitude;
+			changed = true;
+		}
+		if (oldLat != gLatitude) {
+			oldLat = gLatitude;
+			changed = true;
+		}
+		if (changed == true) {
+			System.out.println("Lon: " + gLongitude + ", Lan: " + gLatitude);
+		}
+		
 		
 	}
 
