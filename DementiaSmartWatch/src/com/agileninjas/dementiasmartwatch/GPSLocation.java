@@ -14,8 +14,7 @@ public class GPSLocation implements LocationListener {
 	private static String provider;
 	private static Criteria criteria;
 	private double gLatitude, gLongitude, oldLon, oldLat;
-	private static UniqueID uid;
-
+	
 	public static void runGPS(final Context context) {
 		final GPSLocation gps = new GPSLocation();
 		//UniqueID.setUniqueID(context);
