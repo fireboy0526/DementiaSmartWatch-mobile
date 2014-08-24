@@ -11,7 +11,7 @@
          TextureView, etc.
     -->
 
-    <!--TextView
+    <TextView
         android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,36 +20,23 @@
         android:text="@string/dummy_content"
         android:textColor="#33b5e5"
         android:textSize="50sp"
-        android:textStyle="bold" /-->
+        android:textStyle="bold" />
     
     <LinearLayout
-    android:id="@+id/fullscreen_content"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" 
     android:orientation="vertical"
     android:layout_gravity="center">
 
     <AnalogClock
-        android:layout_width="246dp"
-        android:layout_height="244dp" />
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"/>
 
-    <DigitalClock
-        android:layout_width="fill_parent"
-        android:layout_height="56dp"
-        android:gravity="center"
-        android:textSize="20sp" />
-
-
-
-        <Button
-            android:id="@+id/fullscreen_content_controls"
-            style="?metaButtonBarButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/dummy_button" />
-
-
-
+    <DigitalClock 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:gravity="center" 
+        android:textSize="20sp"/>
 	</LinearLayout>
 
     <!--
@@ -57,6 +44,29 @@
          android:fitsSystemWindows.
     -->
 
-   
+    <FrameLayout
+        android:layout_width="157dp"
+        android:layout_height="275dp"
+        android:fitsSystemWindows="true" >
+
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            style="?metaButtonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="112dp"
+            android:background="@color/black_overlay"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent" >
+
+            <Button
+                android:id="@+id/dummy_button"
+                style="?metaButtonBarButtonStyle"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/dummy_button" />
+        </LinearLayout>
+
+    </FrameLayout>
 
 </FrameLayout>
