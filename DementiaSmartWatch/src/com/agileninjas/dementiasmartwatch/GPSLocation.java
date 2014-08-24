@@ -1,5 +1,20 @@
 package com.agileninjas.dementiasmartwatch;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
 import android.content.Context;
 import android.location.Criteria;
 import android.location.Location;
@@ -7,6 +22,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Toast;
 
 public class GPSLocation implements LocationListener {
@@ -55,8 +71,6 @@ public class GPSLocation implements LocationListener {
         }
 	}
 	
-	
-	
 	//To return Longitude
 	public double getLongitude() {
 		return gLongitude;
@@ -81,27 +95,56 @@ public class GPSLocation implements LocationListener {
 			changed = true;
 		}
 		if (changed == true) {
-			System.out.println("Lon: " + gLongitude + ", Lan: " + gLatitude);
-		}
-		
-		
+			//Send data
+			final HttpClient httpclient = new DefaultHttpClient();
+			final HttpPost httppost = new HttpPost("http://hungpohuang.com/agile/include/gpsrecord.php");
+			
+			//Adding data
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+			nameValuePairs.add(new BasicNameValuePair("id", UniqueID.getUniqueID()));
+			nameValuePairs.add(new BasicNameValuePair("lon", String.valueOf(gLongitude)));
+			nameValuePairs.add(new BasicNameValuePair("lat", String.valueOf(gLatitude)));
+			
+			//Encoding data
+			try {
+				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			} catch (UnsupportedEncodingException e) {
+	            // log exception
+	            e.printStackTrace();
+	        }
+			
+			//making Post Request
+			Runnable runnable = new Runnable() {
+				@Override
+				public void run() {
+					try {
+						ResponseHandler<String> responseHandler=new BasicResponseHandler();
+				        String responseBody = httpclient.execute(httppost, responseHandler);
+						Log.d("REsponse of POST: ", responseBody);
+					} catch (ClientProtocolException e) {
+					    e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				
+			};
+			new Thread(runnable).start();
+		}		
 	}
 
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public void onProviderEnabled(String provider) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void onProviderDisabled(String provider) {
 		// TODO Auto-generated method stub
-		
 	}
 }

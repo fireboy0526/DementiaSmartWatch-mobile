@@ -6,7 +6,7 @@ import android.net.wifi.WifiManager;
 
 
 public class UniqueID {
-	private String uniqueID;
+	private static String uniqueID;
 	
 	public void setUniqueID() {
 		/*WifiManager m_wm = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
@@ -21,7 +21,7 @@ public class UniqueID {
 		}*/
 	}
 	
-	public String getUniqueID() {
-		return this.uniqueID;
+	public static String getUniqueID() {
+		return uniqueID = "1234";
 	}
 }
