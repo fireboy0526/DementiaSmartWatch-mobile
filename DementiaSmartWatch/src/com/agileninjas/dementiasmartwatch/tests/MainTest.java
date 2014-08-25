@@ -113,6 +113,7 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main> {
 	    assertNotNull(layoutParams);
 	    assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
 	    assertEquals(layoutParams.height, WindowManager.LayoutParams.MATCH_PARENT);
+	    assertEquals("Incorrect label of the button", "Panic Button", mButton.getText());
 	}
 	
 }

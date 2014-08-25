@@ -30,6 +30,7 @@ public class GPSLocation implements LocationListener {
 	private static String provider;
 	private static Criteria criteria;
 	private double gLatitude, gLongitude, oldLon, oldLat;
+	private boolean locationChanged;
 	
 	public static void runGPS(final Context context) {
 		final GPSLocation gps = new GPSLocation();
@@ -80,21 +81,26 @@ public class GPSLocation implements LocationListener {
 	public double getLatitude() {
 		return gLatitude;
 	}
-
+	
+	public boolean getLocationChanged()
+	{
+		return locationChanged;
+	}
+	
 	//Run this when location changes
 	public void onLocationChanged(Location location) {
-		boolean changed = false;
+		locationChanged = false;
 		gLongitude = (double)(location.getLongitude());
 		gLatitude = (double)(location.getLatitude());
 		if (oldLon != gLongitude) {
 			oldLon = gLongitude;
-			changed = true;
+			locationChanged = true;
 		}
 		if (oldLat != gLatitude) {
 			oldLat = gLatitude;
-			changed = true;
+			locationChanged = true;
 		}
-		if (changed == true) {
+		if (locationChanged == true) {
 			//Send data
 			final HttpClient httpclient = new DefaultHttpClient();
 			final HttpPost httppost = new HttpPost("http://hungpohuang.com/agile/include/gpsrecord.php");
