@@ -16,16 +16,16 @@ import android.widget.LinearLayout;
 
 public class MainTest extends ActivityInstrumentationTestCase2<Main> {
 
-	private int ANALOG_CLOCK_WIDTH = 246;
-	private int ANALOG_CLOCK_HEIGHT = 244;
-	private int DIGITAL_CLOCK_HEIGHT = 56;
+//	private int ANALOG_CLOCK_WIDTH = 246;
+//	private int ANALOG_CLOCK_HEIGHT = 244;
+//	private int DIGITAL_CLOCK_HEIGHT = 56;
 	//private TextView mTextView;
 	private Main mActivity;
 	private LinearLayout mLinearLayout;
 	private AnalogClock mAnalogClock;
 	private DigitalClock mDigitalClock;
 	private Button mButton;
-
+    
 	public MainTest() {
 		super(Main.class);
 	}
@@ -36,7 +36,7 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main> {
 		super.setUp();
 		
 		setActivityInitialTouchMode(true);
-
+		
 	    mActivity = getActivity();
 	    
 		//mTextView =  (TextView)mActivity.findViewById(R.id.fullscreen_content);
@@ -87,8 +87,8 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main> {
 	    final ViewGroup.LayoutParams layoutParams =
 	    		mAnalogClock.getLayoutParams();
 	    assertNotNull(layoutParams);
-	    assertEquals(layoutParams.width, ANALOG_CLOCK_WIDTH);
-	    assertEquals(layoutParams.height, ANALOG_CLOCK_HEIGHT);
+	    assertEquals(layoutParams.width, WindowManager.LayoutParams.FILL_PARENT);
+	    assertEquals(layoutParams.height,WindowManager.LayoutParams.FILL_PARENT);
 	}
 	
 	public void testDigitalClock_layout() {
@@ -100,7 +100,7 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main> {
 	    		mDigitalClock.getLayoutParams();
 	    assertNotNull(layoutParams);
 	    assertEquals(layoutParams.width, WindowManager.LayoutParams.FILL_PARENT);
-	    assertEquals(layoutParams.height,DIGITAL_CLOCK_HEIGHT);
+	    assertEquals(layoutParams.height,WindowManager.LayoutParams.FILL_PARENT);
 	}
 	
 	public void testButton_layout() {

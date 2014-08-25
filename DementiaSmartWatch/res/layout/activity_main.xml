@@ -31,13 +31,13 @@
 
     <AnalogClock
     	android:id="@+id/analog_clock"
-        android:layout_width="246dp"
-        android:layout_height="244dp" />
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
 
     <DigitalClock
     	android:id="@+id/digital_clock"
         android:layout_width="fill_parent"
-        android:layout_height="56dp"
+        android:layout_height="fill_parent"
         android:gravity="center"
         android:textSize="20sp" />
 
