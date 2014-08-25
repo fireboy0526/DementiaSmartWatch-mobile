@@ -2,7 +2,9 @@ package com.agileninjas.dementiasmartwatch;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -30,6 +32,7 @@ public class GPSLocation implements LocationListener {
 	private static String provider;
 	private static Criteria criteria;
 	private double gLatitude, gLongitude, oldLon, oldLat;
+	private boolean locationChanged;
 	
 	public static void runGPS(final Context context) {
 		final GPSLocation gps = new GPSLocation();
@@ -80,30 +83,40 @@ public class GPSLocation implements LocationListener {
 	public double getLatitude() {
 		return gLatitude;
 	}
-
+	
+	public boolean getLocationChanged()
+	{
+		return locationChanged;
+	}
+	
 	//Run this when location changes
 	public void onLocationChanged(Location location) {
-		boolean changed = false;
+		locationChanged = false;
 		gLongitude = (double)(location.getLongitude());
 		gLatitude = (double)(location.getLatitude());
 		if (oldLon != gLongitude) {
 			oldLon = gLongitude;
-			changed = true;
+			locationChanged = true;
 		}
 		if (oldLat != gLatitude) {
 			oldLat = gLatitude;
-			changed = true;
+			locationChanged = true;
 		}
-		if (changed == true) {
+		if (locationChanged == true) {
+			//Get Date timestamp
+			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+			String date = s.format(new Date());
+			
 			//Send data
 			final HttpClient httpclient = new DefaultHttpClient();
 			final HttpPost httppost = new HttpPost("http://hungpohuang.com/agile/include/gpsrecord.php");
 			
 			//Adding data
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
-			nameValuePairs.add(new BasicNameValuePair("id", UniqueID.getUniqueID()));
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
+			nameValuePairs.add(new BasicNameValuePair("user_id", UniqueID.getUniqueID()));
 			nameValuePairs.add(new BasicNameValuePair("lon", String.valueOf(gLongitude)));
 			nameValuePairs.add(new BasicNameValuePair("lat", String.valueOf(gLatitude)));
+			nameValuePairs.add(new BasicNameValuePair("date", String.valueOf(date)));
 			
 			//Encoding data
 			try {
@@ -120,7 +133,7 @@ public class GPSLocation implements LocationListener {
 					try {
 						ResponseHandler<String> responseHandler=new BasicResponseHandler();
 				        String responseBody = httpclient.execute(httppost, responseHandler);
-						Log.d("REsponse of POST: ", responseBody);
+						Log.d("Response of POST: ", responseBody);
 					} catch (ClientProtocolException e) {
 					    e.printStackTrace();
 					} catch (IOException e) {
