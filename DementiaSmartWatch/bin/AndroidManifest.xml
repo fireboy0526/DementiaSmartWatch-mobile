@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
     
     <application
         android:allowBackup="true"
@@ -29,6 +30,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+		<uses-library android:name="android.test.runner" />
+		
     </application>
+
+	<instrumentation android:name="android.test.InstrumentationTestRunner"
+    android:targetPackage="com.agileninjas.dementiasmartwatch"
+    android:label="MyTest" />
 
 </manifest>

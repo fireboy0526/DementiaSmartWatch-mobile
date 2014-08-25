@@ -30,10 +30,12 @@
     android:layout_gravity="center">
 
     <AnalogClock
+    	android:id="@+id/analog_clock"
         android:layout_width="246dp"
         android:layout_height="244dp" />
 
     <DigitalClock
+    	android:id="@+id/digital_clock"
         android:layout_width="fill_parent"
         android:layout_height="56dp"
         android:gravity="center"
