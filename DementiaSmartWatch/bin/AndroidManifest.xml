@@ -13,6 +13,10 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_GPS"/>
+	<uses-permission android:name="android.permission.ACCESS_LOCATION"/>
+	<uses-permission android:name="android.permission.ACCESS_ASSISTED_GPS"/>
+
     
     <application
         android:allowBackup="true"

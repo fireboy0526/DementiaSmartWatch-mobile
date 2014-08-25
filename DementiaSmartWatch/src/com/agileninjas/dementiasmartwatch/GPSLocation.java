@@ -55,20 +55,21 @@ public class GPSLocation implements LocationListener {
         	//Get the location from the given provider
         	Location location = locationManager.getLastKnownLocation(provider);
         	
-        	locationManager.requestLocationUpdates(provider, 1000, 1, this);
+        	//locationManager setting (GPS/Network Provider, time beore update, distance before update, this)
+        	locationManager.requestLocationUpdates(provider, 1000, 5, this);
         	
         	if(location != null) {
         		onLocationChanged(location);
         	}
-        	
-        	//To continuously get the GPS connection after first load
+
+        	/*//To continuously get the GPS connection after first load
     		final Handler handler = new Handler();
     		handler.postDelayed(new Runnable() {
     			public void run() {
     				start(context);
     				//handler.postDelayed(this, 1000);
     			}
-    		},1000);
+    		},1000);*/
         } else {
         	Toast.makeText(context, "No Provider Found", Toast.LENGTH_SHORT).show();
         }
@@ -94,16 +95,18 @@ public class GPSLocation implements LocationListener {
 		locationChanged = false;
 		gLongitude = (double)(location.getLongitude());
 		gLatitude = (double)(location.getLatitude());
+		
 		if (oldLon != gLongitude) {
 			oldLon = gLongitude;
 			locationChanged = true;
 		}
+		
 		if (oldLat != gLatitude) {
 			oldLat = gLatitude;
 			locationChanged = true;
 		}
+		
 		if (locationChanged == true) {
-
 			//Get Date timestamp
 			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
 			String date = s.format(new Date());
@@ -115,10 +118,10 @@ public class GPSLocation implements LocationListener {
 			//Adding data
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
 			nameValuePairs.add(new BasicNameValuePair("user_id", UniqueID.getUniqueID()));
-			nameValuePairs.add(new BasicNameValuePair("lon", String.valueOf(gLongitude)));
 			nameValuePairs.add(new BasicNameValuePair("lat", String.valueOf(gLatitude)));
+			nameValuePairs.add(new BasicNameValuePair("lon", String.valueOf(gLongitude)));
 			nameValuePairs.add(new BasicNameValuePair("date", String.valueOf(date)));
-			
+
 			//Encoding data
 			try {
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
