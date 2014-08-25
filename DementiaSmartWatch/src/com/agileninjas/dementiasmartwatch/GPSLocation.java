@@ -103,13 +103,11 @@ public class GPSLocation implements LocationListener {
 			locationChanged = true;
 		}
 		if (locationChanged == true) {
-<<<<<<< HEAD
+
 			//Get Date timestamp
 			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
 			String date = s.format(new Date());
-			
-=======
->>>>>>> origin/master
+
 			//Send data
 			final HttpClient httpclient = new DefaultHttpClient();
 			final HttpPost httppost = new HttpPost("http://hungpohuang.com/agile/include/gpsrecord.php");

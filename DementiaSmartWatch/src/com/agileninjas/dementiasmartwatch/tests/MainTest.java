@@ -114,14 +114,11 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main> {
 	    assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
 	    assertEquals(layoutParams.height, WindowManager.LayoutParams.MATCH_PARENT);
 	    assertEquals("Incorrect label of the button", "Panic Button", mButton.getText());
-<<<<<<< HEAD
-=======
 	}
-	
+
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
->>>>>>> origin/master
 	}
 	
 }
