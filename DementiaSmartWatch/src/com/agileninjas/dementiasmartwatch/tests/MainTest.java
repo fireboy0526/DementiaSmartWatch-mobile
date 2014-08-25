@@ -16,9 +16,9 @@ import android.widget.LinearLayout;
 
 public class MainTest extends ActivityInstrumentationTestCase2<Main> {
 
-//	private int ANALOG_CLOCK_WIDTH = 246;
-//	private int ANALOG_CLOCK_HEIGHT = 244;
-//	private int DIGITAL_CLOCK_HEIGHT = 56;
+	//private int ANALOG_CLOCK_WIDTH = 246;
+	//private int ANALOG_CLOCK_HEIGHT = 244;
+	//private int DIGITAL_CLOCK_HEIGHT = 56;
 	//private TextView mTextView;
 	private Main mActivity;
 	private LinearLayout mLinearLayout;
@@ -87,8 +87,8 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main> {
 	    final ViewGroup.LayoutParams layoutParams =
 	    		mAnalogClock.getLayoutParams();
 	    assertNotNull(layoutParams);
-	    assertEquals(layoutParams.width, WindowManager.LayoutParams.FILL_PARENT);
-	    assertEquals(layoutParams.height,WindowManager.LayoutParams.FILL_PARENT);
+	    assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
+	    assertEquals(layoutParams.height,WindowManager.LayoutParams.MATCH_PARENT);
 	}
 	
 	public void testDigitalClock_layout() {
@@ -99,8 +99,8 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main> {
 	    final ViewGroup.LayoutParams layoutParams =
 	    		mDigitalClock.getLayoutParams();
 	    assertNotNull(layoutParams);
-	    assertEquals(layoutParams.width, WindowManager.LayoutParams.FILL_PARENT);
-	    assertEquals(layoutParams.height,WindowManager.LayoutParams.FILL_PARENT);
+	    assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
+	    assertEquals(layoutParams.height,WindowManager.LayoutParams.MATCH_PARENT);
 	}
 	
 	public void testButton_layout() {
@@ -114,6 +114,11 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main> {
 	    assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
 	    assertEquals(layoutParams.height, WindowManager.LayoutParams.MATCH_PARENT);
 	    assertEquals("Incorrect label of the button", "Panic Button", mButton.getText());
+	}
+	
+	@Override
+	protected void tearDown() throws Exception {
+		super.tearDown();
 	}
 	
 }
