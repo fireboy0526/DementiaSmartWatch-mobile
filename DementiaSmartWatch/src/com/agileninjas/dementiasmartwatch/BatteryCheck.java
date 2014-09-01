@@ -30,6 +30,11 @@ import android.util.Log;
 public class BatteryCheck {
 	private boolean batteryLow = false;
 	
+	public boolean getBatteryLow()
+	{
+		return batteryLow;
+	}
+	
 	public void getBatterLevel(Context context) {
 		BroadcastReceiver batteryLevelReceiver = new BroadcastReceiver() {
 
