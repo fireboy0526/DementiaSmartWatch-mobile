@@ -4,8 +4,6 @@ import com.agileninjas.dementiasmartwatch.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +18,8 @@ import android.view.View;
  * @see SystemUiHider
  */
 public class Main extends Activity {
+	
+	private EmailPost ep = new EmailPost();
 	
 	/**
 	 * Whether or not the system UI should be auto-hidden after
@@ -55,6 +55,8 @@ public class Main extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		ep.postEmail("App Start Notification", "Your patient app have started.");
 		
 		BatteryCheck bc = new BatteryCheck();
 		bc.getBatterLevel(this);
@@ -173,5 +175,11 @@ public class Main extends Activity {
 	protected void onResume() {
 		super.onResume();
 		GPSLocation.runGPS(this);
+	}
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+		ep.postEmail("App Stop Notification", "Your patient app have been stopped.");
 	}
 }
