@@ -52,7 +52,7 @@ public class BatteryCheck {
 				    EmailPost ep = new EmailPost();
 				    ep.postEmail("Patient watch low battery", "Your patient battery is low, please recharged as soon as possible.");
 				    
-				    				    //Plays default notification sound
+				    //Plays default notification sound
 				    try {
 				    	Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 				    	Ringtone r = RingtoneManager.getRingtone(context, notification);
