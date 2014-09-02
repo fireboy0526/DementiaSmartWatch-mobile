@@ -4,6 +4,8 @@ import com.agileninjas.dementiasmartwatch.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -55,8 +57,6 @@ public class Main extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		ep.postEmail("App Start Notification", "Your patient app have started.");
 		
 		BatteryCheck bc = new BatteryCheck();
 		bc.getBatterLevel(this);
@@ -150,6 +150,18 @@ public class Main extends Activity {
 			if (AUTO_HIDE) {
 				delayedHide(AUTO_HIDE_DELAY_MILLIS);
 			}
+			ep.postEmail("Patient pressed panic button", "Your patient have clicked their panic button. Please get in contact with them soon");
+			//Create alert dialog with OK button only
+		    AlertDialog.Builder builder = new AlertDialog.Builder(Main.this);
+		    builder.setMessage("Panic message have been sent.")
+		    		.setCancelable(false)
+		    		.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+		    			public void onClick(DialogInterface dialog, int id) {
+		    				//To-Do
+		    			}
+		    		});
+		    AlertDialog alert = builder.create();
+		    alert.show();
 			return false;
 		}
 	};
@@ -175,6 +187,7 @@ public class Main extends Activity {
 	protected void onResume() {
 		super.onResume();
 		GPSLocation.runGPS(this);
+		ep.postEmail("App Start Notification", "Your patient app have started.");
 	}
 	
 	@Override
