@@ -5,6 +5,7 @@ import com.agileninjas.dementiasmartwatch.util.SystemUiHider;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.view.View;
  */
 public class Main extends Activity {
 	
+	static Main mainContext;
 	private EmailPost ep = new EmailPost();
 	
 	/**
@@ -58,6 +60,10 @@ public class Main extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		//Setting static context
+		mainContext = this;
+		
+		//Battery check
 		BatteryCheck bc = new BatteryCheck();
 		bc.getBatterLevel(this);
 		

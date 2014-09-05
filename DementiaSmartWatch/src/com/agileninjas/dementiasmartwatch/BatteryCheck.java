@@ -43,10 +43,8 @@ public class BatteryCheck {
 				//check to see if battery is lower than 20% then pop alert, sound and email
 				if (level > 20) {
 					batteryLow = false;
-					//Log.d("BroadcastNotifier", "BatteryLow: false");
 				} else if(level <= 20 && batteryLow == false){
 				    batteryLow = true;
-				    //Log.e("BraodcastNotifier", "GOT LOW BATTERY WARNING");
 				    
 				    //Sending email to patient relative
 				    EmailPost ep = new EmailPost();

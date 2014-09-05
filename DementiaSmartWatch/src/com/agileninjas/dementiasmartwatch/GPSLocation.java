@@ -7,31 +7,26 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.params.ConnManagerParams;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
 
-import android.app.IntentService;
 import android.content.Context;
-import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -41,7 +36,7 @@ public class GPSLocation implements LocationListener {
 	private static Criteria criteria;
 	private double gLatitude, gLongitude, oldLon, oldLat;
 	private boolean locationChanged;
-	private List<NameValuePair> nameValuePairs;
+	//Declaring a class level context for future use
 	
 	public static void runGPS(final Context context) {
 		final GPSLocation gps = new GPSLocation();
@@ -51,6 +46,7 @@ public class GPSLocation implements LocationListener {
 	}
 	
 	public void start(final Context context) {
+		
 		 //Getting LocationManager Object
         locationManager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
         
@@ -71,17 +67,11 @@ public class GPSLocation implements LocationListener {
         		onLocationChanged(location);
         	}
 
-        	/*//To continuously get the GPS connection after first load
-    		final Handler handler = new Handler();
-    		handler.postDelayed(new Runnable() {
-    			public void run() {
-    				start(context);
-    				//handler.postDelayed(this, 1000);
-    			}
-    		},1000);*/
         } else {
         	Toast.makeText(context, "No Provider Found", Toast.LENGTH_SHORT).show();
         }
+        
+        
 	}
 	
 	//To return Longitude
@@ -117,47 +107,6 @@ public class GPSLocation implements LocationListener {
 		
 		if (locationChanged == true) {
 			new asyncTask().execute();
-			/*
-			//Get Date timestamp
-			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
-			String date = s.format(new Date());
-
-			//Send data
-			//httpclient = new DefaultHttpClient();
-			//httppost = new HttpPost("http://hungpohuang.com/agile/include/gpsrecord.php");
-			
-			//Adding data
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
-			nameValuePairs.add(new BasicNameValuePair("user_id", UniqueID.getUniqueID()));
-			nameValuePairs.add(new BasicNameValuePair("lat", String.valueOf(gLatitude)));
-			nameValuePairs.add(new BasicNameValuePair("lon", String.valueOf(gLongitude)));
-			nameValuePairs.add(new BasicNameValuePair("date", String.valueOf(date)));
-			*/
-			//Encoding data
-			/*try {
-				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-			} catch (UnsupportedEncodingException e) {
-	            // log exception
-	            e.printStackTrace();
-	        }*/
-			
-			
-			/*Runnable runnable = new Runnable() {
-				@Override
-				public void run() {
-					try {
-						ResponseHandler<String> responseHandler = new BasicResponseHandler();
-				        String responseBody = httpclient.execute(httppost, responseHandler);
-						Log.d("Response of POST: ", responseBody);
-					} catch (ClientProtocolException e) {
-					    e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-				
-			};
-			new Thread(runnable).start();*/
 		}		
 	}
 
@@ -177,7 +126,8 @@ public class GPSLocation implements LocationListener {
 	}
 
 	public class asyncTask extends AsyncTask<Void, Void, Void> {
-
+		
+		String responseBody;
 		@Override
 		protected Void doInBackground(Void... params) {
 			try {
@@ -208,25 +158,39 @@ public class GPSLocation implements LocationListener {
 		            e.printStackTrace();
 		        }
 				
-				Log.d("Response of http: ", httppost.toString());
-				//System.out.println("lon:" + oldLon);
-				//System.out.println("lat:" + oldLat);
-				
+				//Connect to database and get response
 				try {
-					//HttpResponse response = httpclient.execute(httppost);
 					ResponseHandler<String> responseHandler = new BasicResponseHandler();
-			        String responseBody = httpclient.execute(httppost, responseHandler);
-					Log.e("Response of POST: ", responseBody);
+			        responseBody = httpclient.execute(httppost, responseHandler);
+					Log.d("Response of POST: ", responseBody);
 				} catch (ClientProtocolException e) {
 				    e.printStackTrace();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			return null;
 		}
 		
+		//After AsyncTask finished running
+		protected void onPostExecute(Void param) {
+			if (responseBody.toString().equals("outside")) {
+				//Toast message to tell them to stand still
+				Toast.makeText(Main.mainContext.getApplicationContext(), "You are out of boundary. Please stand still and wait for help!", Toast.LENGTH_SHORT).show();
+				
+				//Play sound to warn them
+				//Plays default notification sound
+			    try {
+			    	Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+			    	Ringtone r = RingtoneManager.getRingtone(Main.mainContext.getApplicationContext(), notification);
+			    	r.play();
+			    } catch (Exception e) {
+			    	e.printStackTrace();
+			    }
+			}
+		}
 	}
 }
