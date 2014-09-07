@@ -13,6 +13,7 @@ import android.os.BatteryManager;
 
 public class BatteryCheck {
 	private boolean batteryLow = false;
+	private SendErrorCode sendErrorCode = new SendErrorCode();
 	
 	public boolean getBatteryLow()
 	{
@@ -45,6 +46,9 @@ public class BatteryCheck {
 					batteryLow = false;
 				} else if(level <= 20 && batteryLow == false){
 				    batteryLow = true;
+				    
+				    //Send error code to server
+					sendErrorCode.sendErrorCode(context, 2);
 				    
 				    //Sending email to patient relative
 				    EmailPost ep = new EmailPost();

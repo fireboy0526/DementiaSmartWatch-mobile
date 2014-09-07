@@ -22,35 +22,22 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-public class GPSLocation implements LocationListener {
+public class SendErrorCode implements LocationListener {
+	
 	private static LocationManager locationManager;
 	private static String provider;
 	private static Criteria criteria;
-	private double gLatitude, gLongitude, oldLon, oldLat;
-	private boolean locationChanged;
-	private boolean emailAlert = false;
-	private boolean errorCode = false;
+	private double gLatitude, gLongitude;
 	private int errorCodeNum = 0;
-	//Declaring a class level context for future use
 	
-	public static void runGPS(final Context context) {
-		final GPSLocation gps = new GPSLocation();
-		//UniqueID.setUniqueID(context);
-		gps.start(context);
+	public void sendErrorCode (Context context, int errorCode) {
 		
-	}
-	
-	public void start(final Context context) {
-		
-		 //Getting LocationManager Object
+		//Getting LocationManager Object
         locationManager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
         
         //Creating an empty criteria object
@@ -67,76 +54,17 @@ public class GPSLocation implements LocationListener {
         	locationManager.requestLocationUpdates(provider, 1000, 5, this);
         	
         	if(location != null) {
-        		onLocationChanged(location);
+        		gLongitude = (double)(location.getLongitude());
+        		gLatitude = (double)(location.getLatitude());
+        		errorCodeNum = errorCode;
+        		new asyncTask().execute();
         	}
 
         } else {
         	Toast.makeText(context, "No Provider Found", Toast.LENGTH_SHORT).show();
         }
-        
-        
 	}
 	
-	//To return Longitude
-	public double getLongitude() {
-		return gLongitude;
-	}
-	
-	//To return Latitude
-	public double getLatitude() {
-		return gLatitude;
-	}
-	
-	public boolean getLocationChanged()
-	{
-		return locationChanged;
-	}
-	
-	public void setErrorCode(boolean errorCode) {
-		this.errorCode = errorCode;
-	}
-	
-	public void setErrorCodeNum(int errorCodeNum) {
-		this.errorCodeNum = errorCodeNum;
-	}
-	
-	//Run this when location changes
-	public void onLocationChanged(Location location) {
-		locationChanged = false;
-		gLongitude = (double)(location.getLongitude());
-		gLatitude = (double)(location.getLatitude());
-		
-		if (oldLon != gLongitude) {
-			oldLon = gLongitude;
-			locationChanged = true;
-		}
-		
-		if (oldLat != gLatitude) {
-			oldLat = gLatitude;
-			locationChanged = true;
-		}
-		
-		if (locationChanged == true) {
-			new asyncTask().execute();
-		}
-		
-	}
-
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
-		// TODO Auto-generated method stub	
-	}
-
-	@Override
-	public void onProviderEnabled(String provider) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void onProviderDisabled(String provider) {
-		// TODO Auto-generated method stub
-	}
-
 	public class asyncTask extends AsyncTask<Void, Void, Void> {
 		
 		String responseBody;
@@ -148,20 +76,16 @@ public class GPSLocation implements LocationListener {
 				String date = s.format(new Date());
 				
 				//Set Connection data
-				//HttpParams httpparams = new BasicHttpParams();
-				//ConnManagerParams.setTimeout(httpparams, 50000);
-				//HttpConnectionParams.setConnectionTimeout(httpparams, 50000);
-				//HttpConnectionParams.setSoTimeout(httpparams, 50000);
 				final HttpClient httpclient = new DefaultHttpClient();//httpparams);
 				final HttpPost httppost = new HttpPost("http://hungpohuang.com/agile/include/gpsrecord.php");
 				
 				//Adding data
-				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
+				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
 				nameValuePairs.add(new BasicNameValuePair("user_id", UniqueID.getUniqueID()));
 				nameValuePairs.add(new BasicNameValuePair("lat", String.valueOf(gLatitude)));
 				nameValuePairs.add(new BasicNameValuePair("lon", String.valueOf(gLongitude)));
 				nameValuePairs.add(new BasicNameValuePair("date", String.valueOf(date)));
-				
+				nameValuePairs.add(new BasicNameValuePair("error_code", String.valueOf(errorCodeNum)));
 				//Encoding data
 				try {
 					httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -186,34 +110,30 @@ public class GPSLocation implements LocationListener {
 			}
 			return null;
 		}
-		
-		//After AsyncTask finished running
-		protected void onPostExecute(Void param) {
-			if (responseBody.toString().equals("outside")) {
-				//Toast message to tell them to stand still
-				Toast.makeText(Main.mainContext.getApplicationContext(), "You are out of boundary. Please stand still and wait for help!", Toast.LENGTH_SHORT).show();
-				
-				//Play sound to warn them
-				//Plays default notification sound
-			    try {
-			    	Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-			    	Ringtone r = RingtoneManager.getRingtone(Main.mainContext.getApplicationContext(), notification);
-			    	r.play();
-			    } catch (Exception e) {
-			    	e.printStackTrace();
-			    }
-			    
-			    if (emailAlert == false) {
-			    	emailAlert = true;
-			    	//Sending email to patient relative
-				    EmailPost ep = new EmailPost();
-				    ep.postEmail("Patient out of boundary!", "Your patient is currently out of their boundary. Please get in touch with them as soon as possible.");
-			    }
-			} else if (responseBody.toString().equals("inside")) {
-				if (emailAlert == true) {
-					emailAlert = false;
-				}
-			}
-		}
 	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

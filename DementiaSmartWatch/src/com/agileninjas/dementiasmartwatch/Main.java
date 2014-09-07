@@ -24,6 +24,7 @@ public class Main extends Activity {
 	
 	static Main mainContext;
 	private EmailPost ep = new EmailPost();
+	private SendErrorCode sendErrorCode = new SendErrorCode();
 	
 	/**
 	 * Whether or not the system UI should be auto-hidden after
@@ -156,6 +157,7 @@ public class Main extends Activity {
 			if (AUTO_HIDE) {
 				delayedHide(AUTO_HIDE_DELAY_MILLIS);
 			}
+			sendErrorCode.sendErrorCode(Main.this, 3);
 			ep.postEmail("Patient pressed panic button", "Your patient have clicked their panic button. Please get in contact with them soon");
 			//Create alert dialog with OK button only
 		    AlertDialog.Builder builder = new AlertDialog.Builder(Main.this);
@@ -193,12 +195,14 @@ public class Main extends Activity {
 	protected void onResume() {
 		super.onResume();
 		GPSLocation.runGPS(this);
+		sendErrorCode.sendErrorCode(this, 4);
 		ep.postEmail("App Start Notification", "Your patient app have started.");
 	}
 	
 	@Override
 	protected void onStop() {
 		super.onStop();
+		sendErrorCode.sendErrorCode(this, 5);
 		ep.postEmail("App Stop Notification", "Your patient app have been stopped.");
 	}
 }
