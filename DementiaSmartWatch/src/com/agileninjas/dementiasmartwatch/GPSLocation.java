@@ -36,6 +36,7 @@ public class GPSLocation implements LocationListener {
 	private static Criteria criteria;
 	private double gLatitude, gLongitude, oldLon, oldLat;
 	private boolean locationChanged;
+	private boolean emailAlert = false;
 	//Declaring a class level context for future use
 	
 	public static void runGPS(final Context context) {
@@ -190,6 +191,17 @@ public class GPSLocation implements LocationListener {
 			    } catch (Exception e) {
 			    	e.printStackTrace();
 			    }
+			    
+			    if (emailAlert == false) {
+			    	emailAlert = true;
+			    	//Sending email to patient relative
+				    EmailPost ep = new EmailPost();
+				    ep.postEmail("Patient out of boundary!", "Your patient is currently out of their boundary. Please get in touch with them as soon as possible.");
+			    }
+			} else if (responseBody.toString().equals("inside")) {
+				if (emailAlert == true) {
+					emailAlert = false;
+				}
 			}
 		}
 	}
