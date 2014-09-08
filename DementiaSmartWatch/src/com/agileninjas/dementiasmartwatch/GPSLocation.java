@@ -168,6 +168,7 @@ public class GPSLocation implements LocationListener {
 				} catch (UnsupportedEncodingException e) {
 		            // log exception
 		            e.printStackTrace();
+		            Log.e("GPSLocation Encoding Error:", e.getMessage());
 		        }
 				
 				//Connect to database and get response
@@ -177,12 +178,15 @@ public class GPSLocation implements LocationListener {
 					Log.d("Response of POST: ", responseBody);
 				} catch (ClientProtocolException e) {
 				    e.printStackTrace();
+				    Log.e("GPSLocation ClientProtocol Error: ", e.getMessage());
 				} catch (IOException e) {
 					e.printStackTrace();
+					Log.e("GPSLocation IOException Error: ", e.getMessage());
 				}
 				
 			} catch (Exception e) {
 				e.printStackTrace();
+				Log.e("GPSLocation AsyncTask Error: ", e.getMessage());
 			}
 			return null;
 		}
@@ -201,6 +205,7 @@ public class GPSLocation implements LocationListener {
 			    	r.play();
 			    } catch (Exception e) {
 			    	e.printStackTrace();
+			    	Log.e("GPSLocation onPostExecute Error: ", e.getMessage());
 			    }
 			    
 			    if (emailAlert == false) {

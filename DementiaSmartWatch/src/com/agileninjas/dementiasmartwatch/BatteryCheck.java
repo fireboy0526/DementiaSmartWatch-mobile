@@ -10,6 +10,7 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.BatteryManager;
+import android.util.Log;
 
 public class BatteryCheck {
 	private boolean batteryLow = false;
@@ -61,6 +62,7 @@ public class BatteryCheck {
 				    	r.play();
 				    } catch (Exception e) {
 				    	e.printStackTrace();
+				    	Log.e("BatteryCheck sound notification error:", e.getMessage());
 				    }
 				    
 				    //Create alert dialog with OK button only

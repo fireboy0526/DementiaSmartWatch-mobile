@@ -41,6 +41,7 @@ public class EmailPost {
 		} catch (UnsupportedEncodingException e) {
             // log exception
             e.printStackTrace();
+            Log.e("EmailPost Encoding Error:", e.getMessage());
         }
 		
 		//making Post Request
@@ -53,8 +54,10 @@ public class EmailPost {
 					Log.d("Response of POST: ", responseBody);
 				} catch (ClientProtocolException e) {
 				    e.printStackTrace();
+				    Log.e("EmailPost ClientProtocol Error: ", e.getMessage());
 				} catch (IOException e) {
 					e.printStackTrace();
+					Log.e("EmailPost IOException Error: ", e.getMessage());
 				}
 			}
 		};

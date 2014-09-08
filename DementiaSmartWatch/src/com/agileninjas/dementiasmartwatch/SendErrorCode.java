@@ -92,6 +92,7 @@ public class SendErrorCode implements LocationListener {
 				} catch (UnsupportedEncodingException e) {
 		            // log exception
 		            e.printStackTrace();
+		            Log.e("SendErrorCode Encoding Error:", e.getMessage());
 		        }
 				
 				//Connect to database and get response
@@ -101,12 +102,15 @@ public class SendErrorCode implements LocationListener {
 					Log.d("Response of POST: ", responseBody);
 				} catch (ClientProtocolException e) {
 				    e.printStackTrace();
+				    Log.e("SendErrorCode ClientProtocol Error: ", e.getMessage());
 				} catch (IOException e) {
 					e.printStackTrace();
+					Log.e("SendErrorCode IOException Error: ", e.getMessage());
 				}
 				
 			} catch (Exception e) {
 				e.printStackTrace();
+				Log.e("SendErrorCode AsyncTask Error: ", e.getMessage());
 			}
 			return null;
 		}
