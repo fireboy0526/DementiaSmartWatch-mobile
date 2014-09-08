@@ -5,6 +5,7 @@ import com.agileninjas.dementiasmartwatch.GPSLocation;
 import android.location.Location;
 //import android.location.LocationManager;
 import android.test.AndroidTestCase;
+import com.robotium.solo.Solo;
 
 
 public class GPSLocationTest extends AndroidTestCase{

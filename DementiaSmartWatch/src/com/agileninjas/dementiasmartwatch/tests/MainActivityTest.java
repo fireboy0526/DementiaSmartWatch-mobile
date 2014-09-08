@@ -78,9 +78,6 @@ public class MainActivityTest extends ActivityUnitTestCase<Main>{
         // At this point, you could confirm that the activity has shut itself down appropriately,
         // or you could use a Mock Context to confirm that your activity has released any system
         // resources it should no longer be holding.
-
-        // ActivityUnitTestCase.tearDown(), which is always automatically called, will take care
-        // of calling onDestroy().
     }
 
 }

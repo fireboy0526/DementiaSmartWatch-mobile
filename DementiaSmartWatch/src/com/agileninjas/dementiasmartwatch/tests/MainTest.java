@@ -1,8 +1,12 @@
 package com.agileninjas.dementiasmartwatch.tests;
 
+import org.robolectric.shadows.ShadowToast;
+
 import com.agileninjas.dementiasmartwatch.Main;
 import com.agileninjas.dementiasmartwatch.R;
 
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
 import android.view.View;
@@ -14,12 +18,8 @@ import android.widget.DigitalClock;
 import android.widget.LinearLayout;
 //import android.widget.TextView;
 
-public class MainTest extends ActivityInstrumentationTestCase2<Main> {
+public class MainTest extends ActivityInstrumentationTestCase2<Main> implements OnClickListener{
 
-	//private int ANALOG_CLOCK_WIDTH = 246;
-	//private int ANALOG_CLOCK_HEIGHT = 244;
-	//private int DIGITAL_CLOCK_HEIGHT = 56;
-	//private TextView mTextView;
 	private Main mActivity;
 	private LinearLayout mLinearLayout;
 	private AnalogClock mAnalogClock;
@@ -48,6 +48,7 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main> {
 	    mDigitalClock =  (DigitalClock)mActivity.findViewById(R.id.digital_clock);
 		
 		mButton = (Button)mActivity.findViewById(R.id.fullscreen_content_controls);
+		mButton.setOnClickListener((android.view.View.OnClickListener) this);
 	}
 	
 	
@@ -115,10 +116,44 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main> {
 	    assertEquals(layoutParams.height, WindowManager.LayoutParams.MATCH_PARENT);
 	    assertEquals("Incorrect label of the button", "Panic Button", mButton.getText());
 	}
+	
+
 
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}
+
+	@Override
+	public void onClick(DialogInterface dialog, int which) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void testViewVisibility() throws NullPointerException {
+	    /**
+	    * here view.getVisibility() returns
+	    * 0 - VISIBLE
+	    * 4 - INVISIBLE
+	    * 8 - GONE
+	    */
+	    String visibility = null;
+	    switch(mButton.getVisibility()) {
+	        case 0 :
+	            visibility = "VISIBLE";
+	        break;
+
+	        case 4:
+	            visibility = "INVISIBLE";
+	        break;
+
+	        case 8:
+	            visibility = "GONE";
+	        break;
+	    }
+	    System.out.println("The visibility of View "+visibility);
+	    assertTrue(true);
+	}
+	
 	
 }
