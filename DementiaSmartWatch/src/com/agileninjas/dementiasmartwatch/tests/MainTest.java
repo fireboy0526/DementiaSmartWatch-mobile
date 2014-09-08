@@ -4,6 +4,7 @@ package com.agileninjas.dementiasmartwatch.tests;
 
 import com.agileninjas.dementiasmartwatch.Main;
 import com.agileninjas.dementiasmartwatch.R;
+import com.robotium.solo.Solo;
 
 import android.app.AlertDialog;
 import android.app.Instrumentation.ActivityMonitor;
@@ -22,7 +23,7 @@ import android.widget.LinearLayout;
 import android.test.suitebuilder.annotation.MediumTest;
 //import android.widget.TextView;
 
-public class MainTest extends ActivityInstrumentationTestCase2<Main> implements OnClickListener{
+public class MainTest extends ActivityInstrumentationTestCase2<Main>{
 
 	private Main mActivity;
 	private LinearLayout mLinearLayout;
@@ -53,7 +54,7 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main> implements 
 	    mDigitalClock =  (DigitalClock)mActivity.findViewById(R.id.digital_clock);
 		
 		mButton = (Button)mActivity.findViewById(R.id.fullscreen_content_controls);
-		mButton.setOnClickListener((android.view.View.OnClickListener) this);
+		//mButton.setOnClickListener((android.view.View.OnClickListener) this);
 	}
 	
 
@@ -114,11 +115,11 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main> implements 
 		super.tearDown();
 	}
 
-	@Override
+	/*@Override
 	public void onClick(DialogInterface dialog, int which) {
 		// TODO Auto-generated method stub
 		
-	}
+	}*/
 	
 	public void testViewVisibility() throws NullPointerException {
 	    /**
@@ -145,35 +146,30 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main> implements 
 	    assertTrue(true);
 	}
 	
-	//@MediumTest
-	/*public void testStartMyActivity() {
-	    mMonitor = getInstrumentation().addMonitor(Main.class.getName(), null, false);
+	@MediumTest
+	public void testPanicButton() {
+	    //mMonitor = getInstrumentation().addMonitor(Main.class.getName(), null, false);
 
-	    TouchUtils.clickView(this, mButton);
+		Solo solo = new Solo(getInstrumentation(),getActivity());
+		
+		getInstrumentation().waitForIdleSync();
+		
+	    //TouchUtils.clickView(this, mButton);
 
-	    Main myActivity = (Main) mMonitor.waitForActivityWithTimeout(2000);
-	    assertNotNull("MyActivity activity not started, activity is null", myActivity);
+	    //mActivity = (Main) mMonitor.waitForActivityWithTimeout(2000);
+	    //assertNotNull("MyActivity activity not started, activity is null", mActivity);
+       
+	    //AlertDialog dialog = mActivity.getLastDialog(); // I create getLastDialog method in MyActivity class. Its return last created AlertDialog
+		mButton.setVisibility(View.VISIBLE);
+		mButton.performClick();
+	    //dialog.show();
+	    //assertTrue(dialog.isShowing());
+	    
+	    assertTrue("Could not find the dialog!", solo.searchText("Panic message have been sent."));
+        assertTrue("Counld not find the button!", solo.searchButton("OK"));
 
-	    AlertDialog dialog = myActivity.getLastDialog(); // I create getLastDialog method in MyActivity class. Its return last created AlertDialog
-	    if (dialog.isShowing()) {
-	        try {
-	            performClick(dialog.getButton(DialogInterface.BUTTON_POSITIVE));
-	        } catch (Throwable e) {
-	            e.printStackTrace();
-	        }
-	    }
-
-	    myActivity.finish();
-	    getInstrumentation().removeMonitor(mMonitor);
-	}*/
-
-	private void performClick(final Button button) throws Throwable {
-	    runTestOnUiThread(new Runnable() {
-	        @Override
-	        public void run() {
-	            button.performClick();
-	        }
-	    });
-	    getInstrumentation().waitForIdleSync();
+	    //mActivity.finish();
+	    //getInstrumentation().removeMonitor(mMonitor);
 	}
+
 }

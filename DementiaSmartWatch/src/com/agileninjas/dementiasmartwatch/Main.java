@@ -27,6 +27,7 @@ public class Main extends Activity {
 	static Main mainContext;
 	private EmailPost ep = new EmailPost();
 	private SendErrorCode sendErrorCode = new SendErrorCode(); 
+	private AlertDialog lastDialog;
 	
 	/**
 	 * Whether or not the system UI should be auto-hidden after
@@ -171,6 +172,7 @@ public class Main extends Activity {
 		    			}
 		    		});
 		    AlertDialog alert = builder.create();
+		    lastDialog = alert;
 		    alert.show();
 			return false;
 		}
@@ -184,6 +186,11 @@ public class Main extends Activity {
 		}
 	};
 
+	public AlertDialog getLastDialog()
+	{
+		return lastDialog;
+	}
+	
 	/**
 	 * Schedules a call to hide() in [delay] milliseconds, canceling any
 	 * previously scheduled calls.
