@@ -1,13 +1,16 @@
 package com.agileninjas.dementiasmartwatch.tests;
 
-import org.robolectric.shadows.ShadowToast;
+//import org.robolectric.shadows.ShadowToast;
 
 import com.agileninjas.dementiasmartwatch.Main;
 import com.agileninjas.dementiasmartwatch.R;
 
+import android.app.AlertDialog;
+import android.app.Instrumentation.ActivityMonitor;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.TouchUtils;
 import android.test.ViewAsserts;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,7 @@ import android.widget.AnalogClock;
 import android.widget.Button;
 import android.widget.DigitalClock;
 import android.widget.LinearLayout;
+import android.test.suitebuilder.annotation.MediumTest;
 //import android.widget.TextView;
 
 public class MainTest extends ActivityInstrumentationTestCase2<Main> implements OnClickListener{
@@ -25,6 +29,7 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main> implements 
 	private AnalogClock mAnalogClock;
 	private DigitalClock mDigitalClock;
 	private Button mButton;
+	private ActivityMonitor mMonitor;
     
 	public MainTest() {
 		super(Main.class);
@@ -51,22 +56,7 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main> implements 
 		mButton.setOnClickListener((android.view.View.OnClickListener) this);
 	}
 	
-	
-//	public void testPreconditions() {
-//	    assertTrue(mTextView != null);
-//	}
-//
-//	public void testText_layout() {
-//	    final View decorView = mActivity.getWindow().getDecorView();
-//
-//	    ViewAsserts.assertOnScreen(decorView, mTextView);
-//
-//	    final ViewGroup.LayoutParams layoutParams =
-//	            mTextView.getLayoutParams();
-//	    assertNotNull(layoutParams);
-//	    assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
-//	    assertEquals(layoutParams.height, WindowManager.LayoutParams.MATCH_PARENT);
-//	}
+
 	
 	public void testLinearLayout_layout() {
 	    final View decorView = mActivity.getWindow().getDecorView();
@@ -151,9 +141,39 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main> implements 
 	            visibility = "GONE";
 	        break;
 	    }
-	    System.out.println("The visibility of View "+visibility);
+	    //System.out.println("The visibility of View "+visibility);
 	    assertTrue(true);
 	}
 	
-	
+	//@MediumTest
+	/*public void testStartMyActivity() {
+	    mMonitor = getInstrumentation().addMonitor(Main.class.getName(), null, false);
+
+	    TouchUtils.clickView(this, mButton);
+
+	    Main myActivity = (Main) mMonitor.waitForActivityWithTimeout(2000);
+	    assertNotNull("MyActivity activity not started, activity is null", myActivity);
+
+	    AlertDialog dialog = myActivity.getLastDialog(); // I create getLastDialog method in MyActivity class. Its return last created AlertDialog
+	    if (dialog.isShowing()) {
+	        try {
+	            performClick(dialog.getButton(DialogInterface.BUTTON_POSITIVE));
+	        } catch (Throwable e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    myActivity.finish();
+	    getInstrumentation().removeMonitor(mMonitor);
+	}*/
+
+	private void performClick(final Button button) throws Throwable {
+	    runTestOnUiThread(new Runnable() {
+	        @Override
+	        public void run() {
+	            button.performClick();
+	        }
+	    });
+	    getInstrumentation().waitForIdleSync();
+	}
 }

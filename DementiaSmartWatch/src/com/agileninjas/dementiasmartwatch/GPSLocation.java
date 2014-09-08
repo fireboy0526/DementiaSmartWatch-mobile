@@ -39,6 +39,7 @@ public class GPSLocation implements LocationListener {
 	private boolean emailAlert = false;
 	private boolean errorCode = false;
 	private int errorCodeNum = 0;
+	private String responseBody;
 	//Declaring a class level context for future use
 	
 	public static void runGPS(final Context context) {
@@ -92,6 +93,16 @@ public class GPSLocation implements LocationListener {
 		return locationChanged;
 	}
 	
+	public boolean getEmailAlert()
+	{
+		return emailAlert;
+	}
+	
+	public String getResponseBody()
+	{
+		return responseBody;
+	}
+	
 	public void setErrorCode(boolean errorCode) {
 		this.errorCode = errorCode;
 	}
@@ -139,7 +150,7 @@ public class GPSLocation implements LocationListener {
 
 	public class asyncTask extends AsyncTask<Void, Void, Void> {
 		
-		String responseBody;
+		//String responseBody;
 		@Override
 		protected Void doInBackground(Void... params) {
 			try {

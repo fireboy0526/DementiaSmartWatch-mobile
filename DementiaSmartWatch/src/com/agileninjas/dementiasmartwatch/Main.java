@@ -1,5 +1,7 @@
 package com.agileninjas.dementiasmartwatch;
 
+import java.util.WeakHashMap;
+
 import com.agileninjas.dementiasmartwatch.util.SystemUiHider;
 
 import android.annotation.TargetApi;
@@ -24,7 +26,7 @@ public class Main extends Activity {
 	
 	static Main mainContext;
 	private EmailPost ep = new EmailPost();
-	private SendErrorCode sendErrorCode = new SendErrorCode();
+	private SendErrorCode sendErrorCode = new SendErrorCode(); 
 	
 	/**
 	 * Whether or not the system UI should be auto-hidden after
