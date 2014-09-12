@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -203,7 +204,12 @@ public class Main extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		GPSLocation.runGPS(this);
+		GPSLocation gpsLocation = new GPSLocation();
+		if (gpsLocation.checkSignal(this) == true) {
+			gpsLocation.start(this);
+		} else {
+			Log.e("No signal", "No GPS signal");
+		}
 		sendErrorCode.sendErrorCode(this, 4);
 		ep.postEmail("App Start Notification", "Your patient app have started.");
 	}

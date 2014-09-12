@@ -41,12 +41,23 @@ public class GPSLocation implements LocationListener {
 	private int errorCodeNum = 0;
 	private String responseBody;
 	//Declaring a class level context for future use
-	
+	/*
 	public static void runGPS(final Context context) {
 		final GPSLocation gps = new GPSLocation();
 		//UniqueID.setUniqueID(context);
 		gps.start(context);
 		
+	}
+	*/
+	
+	public boolean checkSignal(Context context) {
+		locationManager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
+		
+		if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public void start(final Context context) {
