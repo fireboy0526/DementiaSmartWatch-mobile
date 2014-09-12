@@ -34,7 +34,7 @@ public class GPSLocation implements LocationListener {
 	private static LocationManager locationManager;
 	private static String provider;
 	private static Criteria criteria;
-	private double gLatitude, gLongitude, oldLon, oldLat;
+	private double gLatitude, gLongitude, oldLon = 0.0, oldLat = 0.0;
 	private boolean locationChanged;
 	private boolean emailAlert = false;
 	private boolean errorCode = false;
@@ -124,9 +124,15 @@ public class GPSLocation implements LocationListener {
 	
 	//Run this when location changes
 	public void onLocationChanged(Location location) {
+		boolean splike = true;
 		locationChanged = false;
 		gLongitude = (double)(location.getLongitude());
 		gLatitude = (double)(location.getLatitude());
+		
+		/*if (oldLon != 0.0 && oldLat != 0.0) {
+			
+		}*/
+		Log.e ("Distance", String.valueOf(distance(oldLat, oldLon, gLatitude, gLongitude)));
 		
 		if (oldLon != gLongitude) {
 			oldLon = gLongitude;
@@ -143,7 +149,22 @@ public class GPSLocation implements LocationListener {
 		}
 		
 	}
+	
+	private double deg2rad(double rad) {
+		return (rad * 180 / Math.PI);
+	}
 
+	private double distance(double lat1, double lon1, double lat2, double lon2) {
+		  double theta = lon1 - lon2;
+		  double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+		  dist = Math.acos(dist);
+		  dist = deg2rad(dist);
+		  dist = dist * 60 * 1.1515;
+		  dist = dist * 1.609344;
+		  return (dist);
+		}
+
+	
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 		// TODO Auto-generated method stub	
@@ -170,10 +191,6 @@ public class GPSLocation implements LocationListener {
 				String date = s.format(new Date());
 				
 				//Set Connection data
-				//HttpParams httpparams = new BasicHttpParams();
-				//ConnManagerParams.setTimeout(httpparams, 50000);
-				//HttpConnectionParams.setConnectionTimeout(httpparams, 50000);
-				//HttpConnectionParams.setSoTimeout(httpparams, 50000);
 				final HttpClient httpclient = new DefaultHttpClient();//httpparams);
 				final HttpPost httppost = new HttpPost("http://hungpohuang.com/agile/include/gpsrecord.php");
 				
@@ -239,6 +256,9 @@ public class GPSLocation implements LocationListener {
 			} else if (responseBody.toString().equals("inside")) {
 				if (emailAlert == true) {
 					emailAlert = false;
+					//Sending email to patient relative
+				    EmailPost ep = new EmailPost();
+				    ep.postEmail("Patient back within boundary!", "The patient is back within the set boundary.");
 				}
 			}
 		}
