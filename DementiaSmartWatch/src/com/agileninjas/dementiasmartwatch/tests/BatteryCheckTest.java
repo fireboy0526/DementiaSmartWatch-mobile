@@ -3,6 +3,7 @@ package com.agileninjas.dementiasmartwatch.tests;
 import android.content.Context;
 import android.test.AndroidTestCase;
 
+
 import java.io.*;  
 
 import com.agileninjas.dementiasmartwatch.BatteryCheck;
@@ -17,11 +18,14 @@ public class BatteryCheckTest extends AndroidTestCase{
 		
 		super.setUp();
 		
-		mBatteryCheck = new BatteryCheck();
-		
-		//String [] cmd = {"/usr/bin/open -a Terminal /path/to/the/executable"};
-		//Runtime.getRuntime().exec(cmd);
+		mBatteryCheck = new BatteryCheck();		
 	}
+	
+//	private void openScript() throws IOException
+//	{
+//		String [] cmd = {"open", "/Users/mana/Desktop/sc.command"};
+//		Runtime.getRuntime().exec(cmd);
+//	}
 	
 	//set power capacity to 100
 	public void testBatteryLevelNormalCases1() {
@@ -30,7 +34,8 @@ public class BatteryCheckTest extends AndroidTestCase{
 	}
 	
 	//set power capacity to 10
-	public void testBatteryLevelNormalCases2(){
+	public void testBatteryLevelNormalCases2() throws IOException{
+		//script.openScript();
 		mBatteryCheck.getBatterLevel(getContext());
 		assertTrue(mBatteryCheck.getBatteryLow());
 	}
