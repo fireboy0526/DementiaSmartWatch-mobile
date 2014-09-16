@@ -12,8 +12,10 @@ import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 
 /**
@@ -161,10 +163,12 @@ public class Main extends Activity {
 				delayedHide(AUTO_HIDE_DELAY_MILLIS);
 			}
 			sendErrorCode.sendErrorCode(Main.this, 3);
+			Toast.makeText(Main.this.getApplicationContext(), "Panic message have been sent.", Toast.LENGTH_SHORT).show();
+
 			ep.postEmail("Patient pressed panic button", "Your patient have clicked their panic button. Please get in contact with them soon");
 			//Create alert dialog with OK button only
 		    AlertDialog.Builder builder = new AlertDialog.Builder(Main.this);
-		    builder.setMessage("Panic message have been sent.")
+		    builder.setMessage("Patient Name: Johnny Bravo\n" + "Contact Person: Bunny Runner\n" + "Contact Number: 0412-345-678")
 		    		.setCancelable(false)
 		    		.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 		    			public void onClick(DialogInterface dialog, int id) {
@@ -203,7 +207,12 @@ public class Main extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		GPSLocation.runGPS(this);
+		GPSLocation gpsLocation = new GPSLocation();
+		if (gpsLocation.checkSignal(this) == true) {
+			gpsLocation.start(this);
+		} else {
+			Log.e("No signal", "No GPS signal");
+		}
 		sendErrorCode.sendErrorCode(this, 4);
 		ep.postEmail("App Start Notification", "Your patient app have started.");
 	}
