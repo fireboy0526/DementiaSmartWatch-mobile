@@ -55,7 +55,6 @@
                <deleteConflictingFiles>true</deleteConflictingFiles>
                <undeployBeforeDeploy>true</undeployBeforeDeploy>
                <test>
-                        <!--<skip>true|false|auto</skip>-->
                         <!--<instrumentationPackage>packageName</instrumentationPackage>-->
                         <!--<instrumentationRunner>className</instrumentationRunner>-->
                         <!--<debug>true|false</debug>-->
