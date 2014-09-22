@@ -1,4 +1,4 @@
-package com.agileninjas.dementiasmartwatch.tests;
+package com.agileninjas.dementiasmartwatch;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;

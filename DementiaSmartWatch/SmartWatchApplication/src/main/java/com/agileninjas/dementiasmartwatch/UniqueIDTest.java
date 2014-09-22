@@ -1,4 +1,4 @@
-package com.agileninjas.dementiasmartwatch.tests;
+package com.agileninjas.dementiasmartwatch;
 
 import com.agileninjas.dementiasmartwatch.UniqueID;
 

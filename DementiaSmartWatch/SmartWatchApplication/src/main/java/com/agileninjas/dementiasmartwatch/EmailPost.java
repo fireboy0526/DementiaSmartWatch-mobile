@@ -46,7 +46,6 @@ public class EmailPost {
 		
 		//making Post Request
 		Runnable runnable = new Runnable() {
-			@Override
 			public void run() {
 				try {
 					ResponseHandler<String> responseHandler=new BasicResponseHandler();
