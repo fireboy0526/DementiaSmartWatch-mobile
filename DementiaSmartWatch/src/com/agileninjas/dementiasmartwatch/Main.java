@@ -1,13 +1,10 @@
 package com.agileninjas.dementiasmartwatch;
 
-import java.util.WeakHashMap;
-
 import com.agileninjas.dementiasmartwatch.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
@@ -163,14 +160,14 @@ public class Main extends Activity {
 				delayedHide(AUTO_HIDE_DELAY_MILLIS);
 			}
 			sendErrorCode.sendErrorCode(Main.this, 3);
-			Toast.makeText(Main.this.getApplicationContext(), "Panic message have been sent.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(Main.this.getApplicationContext(), getResources().getString(R.string.panic_button_send), Toast.LENGTH_SHORT).show();
 
-			ep.postEmail("Patient pressed panic button", "Your patient have clicked their panic button. Please get in contact with them soon");
+			ep.postEmail(getResources().getString(R.string.email_panic_subject), getResources().getString(R.string.email_panic_content));
 			//Create alert dialog with OK button only
 		    AlertDialog.Builder builder = new AlertDialog.Builder(Main.this);
-		    builder.setMessage("Patient Name: Johnny Bravo\n" + "Contact Person: Bunny Runner\n" + "Contact Number: 0412-345-678")
+		    builder.setMessage(getResources().getString(R.string.patient_name) + "Johnny Bravo\n" + getResources().getString(R.string.relative_name) + "Bunny Runner\n" + getResources().getString(R.string.emergency_contact_number)+ "0412-345-678")
 		    		.setCancelable(false)
-		    		.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+		    		.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
 		    			public void onClick(DialogInterface dialog, int id) {
 		    				//To-Do
 		    			}
@@ -214,13 +211,13 @@ public class Main extends Activity {
 			Log.e("No signal", "No GPS signal");
 		}
 		sendErrorCode.sendErrorCode(this, 4);
-		ep.postEmail("App Start Notification", "Your patient app have started.");
+		ep.postEmail(getResources().getString(R.string.email_app_start_subject), getResources().getString(R.string.email_app_start_content));
 	}
 	
 	@Override
 	protected void onStop() {
 		super.onStop();
 		sendErrorCode.sendErrorCode(this, 5);
-		ep.postEmail("App Stop Notification", "Your patient app have been stopped.");
+		ep.postEmail(getResources().getString(R.string.email_app_stop_subject), getResources().getString(R.string.email_app_stop_content));
 	}
 }

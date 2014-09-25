@@ -61,7 +61,7 @@ public class SendErrorCode implements LocationListener {
         	}
 
         } else {
-        	Toast.makeText(context, "No Provider Found", Toast.LENGTH_SHORT).show();
+        	Toast.makeText(context, context.getResources().getString(R.string.gps_no_provider), Toast.LENGTH_SHORT).show();
         }
 	}
 	

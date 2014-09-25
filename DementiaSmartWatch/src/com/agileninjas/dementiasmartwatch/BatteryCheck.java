@@ -53,7 +53,7 @@ public class BatteryCheck {
 				    
 				    //Sending email to patient relative
 				    EmailPost ep = new EmailPost();
-				    ep.postEmail("Patient watch low battery", "Your patient battery is low, please recharged as soon as possible.");
+				    ep.postEmail(context.getResources().getString(R.string.email_battery_subject), context.getResources().getString(R.string.email_battery_content));
 				    
 				    //Plays default notification sound
 				    try {
@@ -67,9 +67,9 @@ public class BatteryCheck {
 				    
 				    //Create alert dialog with OK button only
 				    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-				    builder.setMessage("Device power low. Please recharge as soon as possible")
+				    builder.setMessage(context.getResources().getString(R.string.battery_low))
 				    		.setCancelable(false)
-				    		.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				    		.setPositiveButton(context.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
 				    			public void onClick(DialogInterface dialog, int id) {
 				    				//To-Do
 				    			}

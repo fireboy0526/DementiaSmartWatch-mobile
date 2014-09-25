@@ -37,7 +37,7 @@ public class EmailPost {
 
 		//Encoding data
 		try {
-			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs, "utf-8"));
 		} catch (UnsupportedEncodingException e) {
             // log exception
             e.printStackTrace();

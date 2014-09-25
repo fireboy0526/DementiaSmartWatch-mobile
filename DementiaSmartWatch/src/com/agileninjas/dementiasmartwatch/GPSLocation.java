@@ -40,6 +40,7 @@ public class GPSLocation implements LocationListener {
 	private boolean errorCode = false;
 	private int errorCodeNum = 0;
 	private String responseBody;
+	private Context gContext;
 	//Declaring a class level context for future use
 	/*
 	public static void runGPS(final Context context) {
@@ -62,6 +63,8 @@ public class GPSLocation implements LocationListener {
 	
 	public void start(final Context context) {
 		
+		this.gContext = context;
+		
 		 //Getting LocationManager Object
         locationManager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
         
@@ -83,7 +86,7 @@ public class GPSLocation implements LocationListener {
         	}
 
         } else {
-        	Toast.makeText(context, "No Provider Found", Toast.LENGTH_SHORT).show();
+        	Toast.makeText(context, context.getResources().getString(R.string.gps_no_provider), Toast.LENGTH_SHORT).show();
         }
         
         
@@ -124,7 +127,6 @@ public class GPSLocation implements LocationListener {
 	
 	//Run this when location changes
 	public void onLocationChanged(Location location) {
-		boolean splike = true;
 		locationChanged = false;
 		gLongitude = (double)(location.getLongitude());
 		gLatitude = (double)(location.getLatitude());
@@ -182,6 +184,7 @@ public class GPSLocation implements LocationListener {
 
 	public class asyncTask extends AsyncTask<Void, Void, Void> {
 		
+		
 		//String responseBody;
 		@Override
 		protected Void doInBackground(Void... params) {
@@ -234,7 +237,7 @@ public class GPSLocation implements LocationListener {
 		protected void onPostExecute(Void param) {
 			if (responseBody.toString().equals("outside")) {
 				//Toast message to tell them to stand still
-				Toast.makeText(Main.mainContext.getApplicationContext(), "You are out of boundary. Please stand still and wait for help!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(Main.mainContext.getApplicationContext(), gContext.getResources().getString(R.string.gps_out_of_boundry), Toast.LENGTH_SHORT).show();
 				
 				//Play sound to warn them
 				//Plays default notification sound
@@ -251,14 +254,14 @@ public class GPSLocation implements LocationListener {
 			    	emailAlert = true;
 			    	//Sending email to patient relative
 				    EmailPost ep = new EmailPost();
-				    ep.postEmail("Patient out of boundary!", "Your patient is currently out of their boundary. Please get in touch with them as soon as possible.");
+				    ep.postEmail(gContext.getResources().getString(R.string.email_gps_out_of_boundry_subject), gContext.getResources().getString(R.string.email_gps_out_of_boundry_content));
 			    }
 			} else if (responseBody.toString().equals("inside")) {
 				if (emailAlert == true) {
 					emailAlert = false;
 					//Sending email to patient relative
 				    EmailPost ep = new EmailPost();
-				    ep.postEmail("Patient back within boundary!", "The patient is back within the set boundary.");
+				    ep.postEmail(gContext.getResources().getString(R.string.email_gps_in_boundry_subject), gContext.getResources().getString(R.string.email_gps_in_boundry_content));
 				}
 			}
 		}
