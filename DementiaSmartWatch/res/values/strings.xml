@@ -33,8 +33,10 @@
     <string name="relative_name">Contact Person: </string>
     <string name="emergency_contact_number">Contact Number: </string>
     
-    
+    <!-- Others -->
     <string name="ok">OK</string>
+    <string name="imagePanicButton">Panic Button</string>
+    
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
 </resources>
