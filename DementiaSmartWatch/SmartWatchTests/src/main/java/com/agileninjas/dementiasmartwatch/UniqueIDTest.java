@@ -1,6 +1,6 @@
-package com.agileninjas.dementiasmartwatch;
+package main.java.com.agileninjas.dementiasmartwatch;
 
-import com.agileninjas.dementiasmartwatch.UniqueID;
+import main.java.com.agileninjas.dementiasmartwatch.UniqueID;
 
 import android.test.AndroidTestCase;
 

@@ -1,4 +1,4 @@
-package com.agileninjas.dementiasmartwatch.util;
+package main.java.com.agileninjas.dementiasmartwatch.util;
 
 import android.app.Activity;
 import android.view.View;

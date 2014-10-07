@@ -1,4 +1,4 @@
-package com.agileninjas.dementiasmartwatch.tests;
+package main.java.com.agileninjas.dementiasmartwatch;
 
 import android.content.Context;
 import android.location.Location;

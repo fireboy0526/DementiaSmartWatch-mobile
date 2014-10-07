@@ -1,7 +1,9 @@
-package com.agileninjas.dementiasmartwatch;
+package main.java.com.agileninjas.dementiasmartwatch;
 
-import com.agileninjas.dementiasmartwatch.Main;
-import com.agileninjas.dementiasmartwatch.R;
+import com.robotium.solo.Solo;
+
+import main.java.com.agileninjas.dementiasmartwatch.Main;
+import main.java.com.agileninjas.dementiasmartwatch.R;
 
 import android.content.Intent;
 import android.content.Context;
@@ -43,11 +45,11 @@ public class MainActivityTest extends ActivityUnitTestCase<Main>{
     public void testSubLaunch() {
         Main activity = startActivity(mStartIntent, null, null);
         mButton = (Button) activity.findViewById(R.id.fullscreen_content_controls);
-        
+        Solo solo = new Solo(getInstrumentation(),getActivity());
         // This test confirms that when you click the button, the activity attempts to open
         // another activity (by calling startActivity) and close itself (by calling finish()).
         mButton.performClick();
-        
+        assertTrue("Could not find the dialog!", solo.searchText("Panic message have been sent."));
         assertNotNull(getStartedActivityIntent());
         assertTrue(isFinishCalled());
     }    

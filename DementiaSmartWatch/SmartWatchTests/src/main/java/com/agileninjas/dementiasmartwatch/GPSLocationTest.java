@@ -1,10 +1,10 @@
-package com.agileninjas.dementiasmartwatch;
+package main.java.com.agileninjas.dementiasmartwatch;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import com.agileninjas.dementiasmartwatch.GPSLocation;
-import com.agileninjas.dementiasmartwatch.GPSLocation.asyncTask;
+import main.java.com.agileninjas.dementiasmartwatch.GPSLocation;
+//import com.agileninjas.dementiasmartwatch.GPSLocation.asyncTask;
 
 import android.location.Location;
 import android.os.AsyncTask;

@@ -1,4 +1,4 @@
-package com.agileninjas.dementiasmartwatch.util;
+package main.java.com.agileninjas.dementiasmartwatch.util;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
