@@ -1,0 +1,64 @@
+Jira Reference Code: 
+AN-73
+AN-74
+AN-75
+AN-76
+AN-77
+
+Commit Hash: 9ee6f16
+Author: Mana Davarpanah
+Completed Date: Mon Sep 22 14:55:04 2014 +1000
+Comment: Project was built by Maven
+
+ BUILD SUCCESS
+
+Commit Hash: 01336c1
+Author: Mana Davarpanah
+Completed Date: Mon Sep 22 14:39:41 2014 +1000
+Comment: SmartWatch Mobile converted to a Maven project
+
+Integration Testing
+
+Jira Reference Code: 
+Commit Hash: fb60d27
+Author: Mana Davarpanah
+Completed Date: Tue Sep 16 10:50:19 2014 +1000
+Comment: Merge branch 'master' of https://github.com/johnnyluu/DementiaSmartWatch-mobile
+
+Conflicts:
+	DementiaSmartWatch/bin/DementiaSmartWatch.apk
+	DementiaSmartWatch/bin/classes.dex
+
+Jira Reference Code: AN-77,AN-76,AN-74
+Commit Hash: 8c9c667
+Author: Mana Davarpanah
+Completed Date: Tue Sep 16 10:49:16 2014 +1000
+Comment: Edited test class
+
+
+Jira Reference Code: AN-75, AN-73
+Commit Hash: 28c9d26
+Author: Mana Davarpanah
+Completed Date: Mon Sep 8 16:39:57 2014 +1000
+Comment: Test Unit added regarding to panic button
+
+
+Maven 
+
+[INFO] emulator-5554_MyVirtualDevice_unknown_sdk :   Successfully installed /Users/mana/Documents/EclipseWorkspace/DementiaSmartWatch-mobile/DementiaSmartWatch/SmartWatchApplication/target/SmartWatchApplication.apk to emulator-5554_MyVirtualDevice_unknown_sdk
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building SmartWatchApplication 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- android-maven-plugin:3.8.0:run (default-cli) @ SmartWatchApplication ---
+[INFO] Found 1 devices connected with the Android Debug Bridge
+[INFO] android.device parameter set to emulator
+[INFO] emulator-5554_MyVirtualDevice_unknown_sdk :   Attempting to start com.agileninjas.dementiasmartwatch/com.agileninjas.dementiasmartwatch.Main
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 34.901 s
+[INFO] Finished at: 2014-09-22T14:52:08+10:00
+[INFO] Final Memory: 19M/81M
+[INFO] ------------------------------------------------------------------------
