@@ -36,6 +36,7 @@
     <!-- Others -->
     <string name="ok">OK</string>
     <string name="imagePanicButton">Panic Button</string>
+    <string name="imageContact">Contact Button</string>
     
     <string name="dummy_content">DUMMY\nCONTENT</string>
 

@@ -71,6 +71,7 @@ public class Main extends Activity {
 		bc.getBatterLevel(this);
 		
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
+		final View controlsView2 = findViewById(R.id.fullscreen_content_controls2);
 		final View contentView = findViewById(R.id.fullscreen_content);
 
 		// Set up an instance of SystemUiHider to control the system UI for
@@ -93,7 +94,7 @@ public class Main extends Activity {
 							// in-layout UI controls at the bottom of the
 							// screen.
 							if (mControlsHeight == 0) {
-								mControlsHeight = controlsView.getHeight();
+								mControlsHeight = controlsView.getHeight()*2;
 							}
 							if (mShortAnimTime == 0) {
 								mShortAnimTime = getResources().getInteger(
@@ -103,11 +104,17 @@ public class Main extends Activity {
 									.animate()
 									.translationY(visible ? 0 : mControlsHeight)
 									.setDuration(mShortAnimTime);
+							controlsView2
+									.animate()
+									.translationY(visible ? 0 : mControlsHeight)
+									.setDuration(mShortAnimTime);
 						} else {
 							// If the ViewPropertyAnimator APIs aren't
 							// available, simply show or hide the in-layout UI
 							// controls.
 							controlsView.setVisibility(visible ? View.VISIBLE
+									: View.GONE);
+							controlsView2.setVisibility(visible ? View.VISIBLE 
 									: View.GONE);
 						}
 
@@ -136,6 +143,8 @@ public class Main extends Activity {
 		// while interacting with the UI.
 		findViewById(R.id.fullscreen_content_controls).setOnTouchListener(
 				mDelayHideTouchListener);
+		findViewById(R.id.fullscreen_content_controls2).setOnTouchListener(
+				mDelayHideTouchListener2);
 	}
 
 	@Override
@@ -174,13 +183,45 @@ public class Main extends Activity {
 		    		});
 		    AlertDialog alert = builder.create();
 		    lastDialog = alert;
-		    alert.show();
+		    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+			    alert.show();
+		    }
+			return false;
+		}
+	};
+	
+	View.OnTouchListener mDelayHideTouchListener2 = new View.OnTouchListener() {
+		@Override
+		public boolean onTouch(View view, MotionEvent motionEvent) {
+			if (AUTO_HIDE) {
+				delayedHide(AUTO_HIDE_DELAY_MILLIS);
+			}
+		    AlertDialog.Builder builder = new AlertDialog.Builder(Main.this);
+		    builder.setMessage(getResources().getString(R.string.patient_name) + "Johnny Bravo\n" + getResources().getString(R.string.relative_name) + "Bunny Runner\n" + getResources().getString(R.string.emergency_contact_number)+ "0412-345-678")
+		    		.setCancelable(false)
+		    		.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+		    			public void onClick(DialogInterface dialog, int id) {
+		    				//To-Do
+		    			}
+		    		});
+		    AlertDialog alert = builder.create();
+		    lastDialog = alert;
+		    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+			    alert.show();
+		    }
 			return false;
 		}
 	};
 	
 	Handler mHideHandler = new Handler();
+	Handler mHideHandler2 = new Handler();
 	Runnable mHideRunnable = new Runnable() {
+		@Override
+		public void run() {
+			mSystemUiHider.hide();
+		}
+	};
+	Runnable mHideRunnable2 = new Runnable() {
 		@Override
 		public void run() {
 			mSystemUiHider.hide();
@@ -199,6 +240,8 @@ public class Main extends Activity {
 	private void delayedHide(int delayMillis) {
 		mHideHandler.removeCallbacks(mHideRunnable);
 		mHideHandler.postDelayed(mHideRunnable, delayMillis);
+		mHideHandler2.removeCallbacks(mHideRunnable2);
+		mHideHandler.postDelayed(mHideRunnable2, delayMillis);
 	}
 	
 	@Override

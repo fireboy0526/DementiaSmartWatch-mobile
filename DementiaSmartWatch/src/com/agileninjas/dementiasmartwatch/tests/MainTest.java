@@ -4,7 +4,7 @@ package com.agileninjas.dementiasmartwatch.tests;
 
 import com.agileninjas.dementiasmartwatch.Main;
 import com.agileninjas.dementiasmartwatch.R;
-import com.robotium.solo.Solo;
+//import com.robotium.solo.Solo;
 
 import android.app.AlertDialog;
 import android.app.Instrumentation.ActivityMonitor;
@@ -146,6 +146,7 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main>{
 	    assertTrue(true);
 	}
 	
+	/*
 	@MediumTest
 	public void testPanicButton() {
 	    //mMonitor = getInstrumentation().addMonitor(Main.class.getName(), null, false);
@@ -171,5 +172,5 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main>{
 	    //mActivity.finish();
 	    //getInstrumentation().removeMonitor(mMonitor);
 	}
-
+	*/
 }
