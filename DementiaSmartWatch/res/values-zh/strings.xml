@@ -33,8 +33,11 @@
     <string name="relative_name">聯繫人名稱: </string>
     <string name="emergency_contact_number">聯絡人電話: </string>
     
-    
+    <!-- Others -->
     <string name="ok">好</string>
+    <string name="imagePanicButton">緊急按鈕</string>
+    <string name="imageContact">聯絡簿按鈕</string>
+    
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
 </resources>

@@ -48,7 +48,14 @@
         android:scaleType="fitCenter"
         android:src="@drawable/panic_button" 
         android:contentDescription="@string/imagePanicButton"/>
-
+	
+    <ImageButton
+        android:id="@+id/fullscreen_content_controls2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/contact" 
+        android:contentDescription="@string/imageContact"/>
 
        <!--   <Button
             android:id="@+id/fullscreen_content_controls"
