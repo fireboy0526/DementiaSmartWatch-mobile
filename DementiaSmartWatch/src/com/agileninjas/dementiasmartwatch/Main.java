@@ -6,9 +6,11 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.AlarmClock;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -69,6 +71,11 @@ public class Main extends Activity {
 		//Battery check
 		BatteryCheck bc = new BatteryCheck();
 		bc.getBatterLevel(this);
+		
+		//sync alarm
+		
+		//set up / activate alarms
+		setAlarms();
 		
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 		final View contentView = findViewById(R.id.fullscreen_content);
@@ -191,6 +198,16 @@ public class Main extends Activity {
 	{
 		return lastDialog;
 	}
+	
+	//set or activate alarms
+	private void setAlarms(){
+		Intent openNewAlarm = new Intent(AlarmClock.ACTION_SET_ALARM);
+		openNewAlarm.putExtra(AlarmClock.EXTRA_HOUR, 22);
+		openNewAlarm.putExtra(AlarmClock.EXTRA_MINUTES, 20);
+		openNewAlarm.putExtra(AlarmClock.EXTRA_MESSAGE, "Time to take medicine X");
+		openNewAlarm.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
+		startActivity(openNewAlarm);
+	};
 	
 	/**
 	 * Schedules a call to hide() in [delay] milliseconds, canceling any
