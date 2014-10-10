@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Dementia Smart Watch</string>
+    
+    <!-- Panic Button -->
+    <string name="dummy_button">Panic Button</string>
+    <string name="panic_button_send">Panic message have been sent.</string>
+    
+    <!-- Email -->
+    <string name="email_panic_subject">Patient pressed panic button</string>
+    <string name="email_panic_content">Your patient have clicked their panic button. Please get in contact with them soon</string>
+    <string name="email_app_start_subject">App Start Notification</string>
+    <string name="email_app_start_content">Your patient app have started.</string>
+    <string name="email_app_stop_subject">App Stop Notification</string>
+    <string name="email_app_stop_content">Your patient app have been stopped.</string>
+    <string name="email_gps_out_of_boundry_subject">Patient out of boundary!</string>
+    <string name="email_gps_out_of_boundry_content">Your patient is currently out of their boundary. Please get in touch with them as soon as possible.</string>
+    <string name="email_gps_in_boundry_subject">Patient back within boundary!</string>
+    <string name="email_gps_in_boundry_content">The patient is back within the set boundary.</string>
+    <string name="email_battery_subject">Patient watch low battery</string>
+    <string name="email_battery_content">Your patient battery is low, please recharged as soon as possible.</string>
+    
+    <!-- Battery -->
+    <string name="battery_low">Device power low. Please recharge as soon as possible</string>
+    
+    <!-- GPS -->
+    <string name="gps_no_provider">No Provider Found</string>
+    <string name="gps_out_of_boundry">You are out of boundary. Please stand still and wait for help!</string>
+    
+    <!-- Display Contact on panic -->
+    <string name="patient_name">Patient Name: </string>
+    <string name="relative_name">Contact Person: </string>
+    <string name="emergency_contact_number">Contact Number: </string>
+    
+    <!-- Others -->
+    <string name="ok">OK</string>
+    <string name="imagePanicButton">Panic Button</string>
+    
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+</resources>

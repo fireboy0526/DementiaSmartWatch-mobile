@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Dementia Smart Watch</string>
+    
+    <!-- Panic Button -->
+    <string name="dummy_button">緊急按鈕</string>
+    <string name="panic_button_send">緊急訊息已送出</string>
+    
+    <!-- Email -->
+    <string name="email_panic_subject">病人已按緊急按鈕</string>
+    <string name="email_panic_content">您的病人已按緊急按鈕。請儘快與他們聯繫</string>
+    <string name="email_app_start_subject">輔助程式已啟動</string>
+    <string name="email_app_start_content">病人的輔助程式已啟用</string>
+    <string name="email_app_stop_subject">輔助程式已停止</string>
+    <string name="email_app_stop_content">病人的輔助程式已停止</string>
+    <string name="email_gps_out_of_boundry_subject">病人已離開監控範圍</string>
+    <string name="email_gps_out_of_boundry_content">您的病人已離開了監控範圍。請儘快與他們聯誼！</string>
+    <string name="email_gps_in_boundry_subject">病人已回到監控範圍</string>
+    <string name="email_gps_in_boundry_content">病人已回到監控範圍內了</string>
+    <string name="email_battery_subject">病人手錶電量低</string>
+    <string name="email_battery_content">您病人使用的手錶的電量很低。請儘快幫他充電！</string>
+    
+    <!-- Battery -->
+    <string name="battery_low">手錶電池量低，請儘快充電</string>
+    
+    <!-- GPS -->
+    <string name="gps_no_provider">找不到網路和GPS服務</string>
+    <string name="gps_out_of_boundry">您以走出監控範圍了！請待在原地等待幫忙到來</string>
+    
+    <!-- Display Contact on panic -->
+    <string name="patient_name">名稱: </string>
+    <string name="relative_name">聯繫人名稱: </string>
+    <string name="emergency_contact_number">聯絡人電話: </string>
+    
+    
+    <string name="ok">好</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+</resources>
