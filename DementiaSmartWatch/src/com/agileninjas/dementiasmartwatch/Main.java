@@ -75,7 +75,7 @@ public class Main extends Activity {
 		//sync alarm
 		
 		//set up / activate alarms
-		setAlarms();
+		//setAlarms();
 		
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 		final View controlsView2 = findViewById(R.id.fullscreen_content_controls2);
@@ -241,14 +241,14 @@ public class Main extends Activity {
 	}
 	
 	//set or activate alarms
-	private void setAlarms(){
+	/*private void setAlarms(){
 		Intent openNewAlarm = new Intent(AlarmClock.ACTION_SET_ALARM);
 		openNewAlarm.putExtra(AlarmClock.EXTRA_HOUR, 22);
 		openNewAlarm.putExtra(AlarmClock.EXTRA_MINUTES, 20);
 		openNewAlarm.putExtra(AlarmClock.EXTRA_MESSAGE, "Time to take medicine X");
 		openNewAlarm.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
 		startActivity(openNewAlarm);
-	};
+	};*/
 	
 	/**
 	 * Schedules a call to hide() in [delay] milliseconds, canceling any
