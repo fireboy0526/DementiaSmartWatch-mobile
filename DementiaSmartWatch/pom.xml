@@ -25,12 +25,6 @@
       <version>4.1.1.4</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>com.google.android.gms</groupId>
-      <artifactId>google-play-services</artifactId>
-      <version>3</version>
-      <type>apklib</type>
-    </dependency>
   </dependencies>
     
   <build>
