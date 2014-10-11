@@ -25,6 +25,12 @@
       <version>4.1.1.4</version>
       <scope>provided</scope>
     </dependency>
+	<dependency>
+      <groupId>com.agileninjas.demetiasmartwatch</groupId>
+      <artifactId>android</artifactId>
+      <version>4.1.1.4</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
    
   <build>
@@ -37,6 +43,7 @@
            <version>3.9.0-rc.3</version>
            <configuration>
                <sdk>
+               	   <path>${env.ANDROID_HOME}</path>
                    <platform>19</platform>
                </sdk>
                <emulator>
@@ -45,7 +52,7 @@
                     <dexOptimize>false</dexOptimize>
                     <dex>
                         <preDex>false</preDex>
-                        
+                        <preDexLibLocation>/tmp/predexedLibs</preDexLibLocation>
                     </dex>               
                <deleteConflictingFiles>true</deleteConflictingFiles>
                <undeployBeforeDeploy>true</undeployBeforeDeploy>
