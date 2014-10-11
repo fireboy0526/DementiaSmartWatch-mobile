@@ -99,23 +99,6 @@
             </configuration>
             <extensions>true</extensions>
         </plugin>
-		<plugin>
-		  <groupId>de.akquinet.android.rindirect</groupId>
-		  <artifactId>maven-rindirect-plugin</artifactId>
-		  <version>0.4.0</version>
-		  <executions>
-			<execution>
-			  <goals>
-				<goal>generate</goal>
-			  </goals>
-			  <phase>generate-sources</phase>
-			</execution>
-		  </executions>
-		  <configuration>
-			<package>com.google.android</package>
-			<verbose>true</verbose>
-		  </configuration>
-		</plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.1</version>
