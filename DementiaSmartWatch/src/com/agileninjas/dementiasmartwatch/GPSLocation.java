@@ -29,6 +29,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+import com.agileninjas.dementiasmartwatch.R;
 
 public class GPSLocation implements LocationListener {
 	private static LocationManager locationManager;

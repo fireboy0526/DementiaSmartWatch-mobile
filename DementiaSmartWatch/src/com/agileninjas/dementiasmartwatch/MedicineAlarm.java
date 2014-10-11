@@ -3,6 +3,7 @@ package com.agileninjas.dementiasmartwatch;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.AlarmClock;
+import com.agileninjas.dementiasmartwatch.R;
 
 public class MedicineAlarm {
 	public void SetAlarms(Context context){

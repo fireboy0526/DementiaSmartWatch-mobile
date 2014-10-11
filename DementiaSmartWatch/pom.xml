@@ -25,12 +25,6 @@
       <version>4.1.1.4</version>
       <scope>provided</scope>
     </dependency>
-	<dependency>
-    <groupId>com.agileninjas.dementiasmartwatch</groupId>
-    <artifactId>gen</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <type>apklib</type>
-  </dependency>
   </dependencies>
    
   <build>
