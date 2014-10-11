@@ -8,7 +8,7 @@
   </parent>
 
   <artifactId>DementiaSmartWatch</artifactId>
-  <packaging>apklib</packaging>
+  <packaging>apk</packaging>
 
   <name>DementiaSmartWatch - Application</name>
   <properties>
@@ -37,7 +37,6 @@
            <version>3.9.0-rc.3</version>
            <configuration>
                <sdk>
-               	   <path>${env.ANDROID_HOME}</path>
                    <platform>19</platform>
                </sdk>
                <emulator>
@@ -46,7 +45,7 @@
                     <dexOptimize>false</dexOptimize>
                     <dex>
                         <preDex>false</preDex>
-                        <preDexLibLocation>/tmp/predexedLibs</preDexLibLocation>
+                        
                     </dex>               
                <deleteConflictingFiles>true</deleteConflictingFiles>
                <undeployBeforeDeploy>true</undeployBeforeDeploy>
