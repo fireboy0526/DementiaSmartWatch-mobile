@@ -10,6 +10,7 @@ import android.content.Context;
 import android.test.ActivityUnitTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.widget.Button;
+import com.agileninjas.dementiasmartwatch.R;
 
 public class MainActivityTest extends ActivityUnitTestCase<Main>{
 

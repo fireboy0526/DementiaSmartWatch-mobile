@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.DigitalClock;
 import android.widget.LinearLayout;
 import android.test.suitebuilder.annotation.MediumTest;
+import com.agileninjas.dementiasmartwatch.R;
 //import android.widget.TextView;
 
 public class MainTest extends ActivityInstrumentationTestCase2<Main>{

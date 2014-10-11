@@ -13,6 +13,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.BatteryManager;
 import android.util.Log;
+import com.agileninjas.dementiasmartwatch.R;
 
 public class BatteryCheck {
 	private boolean batteryLow = false;

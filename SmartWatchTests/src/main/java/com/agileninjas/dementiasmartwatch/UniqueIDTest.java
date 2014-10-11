@@ -4,6 +4,8 @@ import main.java.com.agileninjas.dementiasmartwatch.UniqueID;
 
 import android.test.AndroidTestCase;
 
+import com.agileninjas.dementiasmartwatch.R;
+
 public class UniqueIDTest extends AndroidTestCase{
 
 	

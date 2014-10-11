@@ -3,6 +3,7 @@ package main.java.com.agileninjas.dementiasmartwatch;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.net.wifi.WifiManager;
+import com.agileninjas.dementiasmartwatch.R;
 
 
 public class UniqueID {
