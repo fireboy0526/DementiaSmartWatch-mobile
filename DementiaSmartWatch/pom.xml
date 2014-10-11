@@ -4,7 +4,7 @@
  <parent>
     <groupId>DementiaSmartWatch-mobile</groupId>
     <artifactId>SmartWatchParent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>DementiaSmartWatch</artifactId>
@@ -34,7 +34,7 @@
 		<plugin>
            <groupId>com.jayway.maven.plugins.android.generation2</groupId>
            <artifactId>android-maven-plugin</artifactId>
-           <version>3.1.1</version>
+           <version>4.0.0</version>
            <configuration>
                <sdk>
                	   <path>${env.ANDROID_HOME}</path>
