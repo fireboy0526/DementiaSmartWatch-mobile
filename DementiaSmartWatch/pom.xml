@@ -11,12 +11,7 @@
   <packaging>apk</packaging>
 
   <name>DementiaSmartWatch - Application</name>
-  <properties>
-    <android.sdk.path>//Users/mana/Documents/android-sdk-macosx</android.sdk.path>
-    <android.device>emulator</android.device>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-  </properties>
+
 
   <dependencies>
     <dependency>
