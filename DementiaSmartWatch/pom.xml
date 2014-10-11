@@ -11,7 +11,12 @@
   <packaging>apk</packaging>
 
   <name>DementiaSmartWatch - Application</name>
-
+  <properties>
+    <android.sdk.path>//Users/mana/Documents/android-sdk-macosx</android.sdk.path>
+    <android.device>emulator</android.device>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -26,6 +31,28 @@
     <finalName>${project.artifactId}</finalName>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
+		<plugin>
+          <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+          <artifactId>android-maven-plugin</artifactId>
+          <version>3.1.1</version>
+           <configuration>
+               <sdk>
+               	   <path>${env.ANDROID_HOME}</path>
+                   <platform>19</platform>
+               </sdk>
+               <emulator>
+                   <avd>MyVirtualDevice</avd>
+               </emulator>
+                    <dexOptimize>false</dexOptimize>
+                    <dex>
+                        <preDex>false</preDex>
+                        <preDexLibLocation>/tmp/predexedLibs</preDexLibLocation>
+                    </dex>               
+               <deleteConflictingFiles>true</deleteConflictingFiles>
+               <undeployBeforeDeploy>true</undeployBeforeDeploy>
+            </configuration>
+          <extensions>true</extensions>
+        </plugin>
 		<plugin>
            <groupId>com.jayway.maven.plugins.android.generation2</groupId>
            <artifactId>android-maven-plugin</artifactId>
