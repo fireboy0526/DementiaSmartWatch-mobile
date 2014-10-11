@@ -8,7 +8,7 @@
   </parent>
 
   <artifactId>DementiaSmartWatch</artifactId>
-  <packaging>apk</packaging>
+  <packaging>apklib</packaging>
 
   <name>DementiaSmartWatch - Application</name>
   <properties>
@@ -30,8 +30,6 @@
   <build>
     <finalName>${project.artifactId}</finalName>
     <sourceDirectory>src</sourceDirectory>
-	<sourceDirectory>build</sourceDirectory>
-	<outputDirectory>target</outputDirectory>
     <plugins>
 		<plugin>
            <groupId>com.jayway.maven.plugins.android.generation2</groupId>
