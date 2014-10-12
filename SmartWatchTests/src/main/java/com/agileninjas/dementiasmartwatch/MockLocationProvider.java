@@ -3,7 +3,6 @@ package main.java.com.agileninjas.dementiasmartwatch;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
-import com.agileninjas.dementiasmartwatch.R2;
 
 public class MockLocationProvider {
 	

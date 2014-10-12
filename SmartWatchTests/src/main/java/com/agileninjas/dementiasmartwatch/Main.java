@@ -15,7 +15,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
-import com.agileninjas.dementiasmartwatch.R2;
 
 
 /**

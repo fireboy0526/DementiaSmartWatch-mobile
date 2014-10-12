@@ -2,7 +2,7 @@ package main.java.com.agileninjas.dementiasmartwatch;
 
 //import org.robolectric.shadows.ShadowToast;
 
-//import com.agileninjas.dementiasmartwatch.Main;
+import com.agileninjas.dementiasmartwatch.Main;
 import main.java.com.agileninjas.dementiasmartwatch.R;
 import com.robotium.solo.Solo;
 
@@ -21,7 +21,6 @@ import android.widget.Button;
 import android.widget.DigitalClock;
 import android.widget.LinearLayout;
 import android.test.suitebuilder.annotation.MediumTest;
-import com.agileninjas.dementiasmartwatch.R2;
 //import android.widget.TextView;
 
 public class MainTest extends ActivityInstrumentationTestCase2<Main>{

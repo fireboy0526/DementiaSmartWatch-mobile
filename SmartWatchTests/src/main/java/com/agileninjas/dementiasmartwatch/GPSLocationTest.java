@@ -13,8 +13,6 @@ import android.test.AndroidTestCase;
 
 import com.robotium.solo.Solo;
 
-import com.agileninjas.dementiasmartwatch.R2;
-
 
 public class GPSLocationTest extends android.test.InstrumentationTestCase{
 
