@@ -27,6 +27,6 @@ android:
     #- sys-img-x86-android-17
 
 script:
-    - mvn clean -DskipTests=true install
-    #- mvn clean install
-    #- mvn clean package -Dmaven.test.skip=true.
+  #- mvn clean -DskipTests=true install
+  - mvn clean install
+  #- mvn clean package -Dmaven.test.skip=true.
