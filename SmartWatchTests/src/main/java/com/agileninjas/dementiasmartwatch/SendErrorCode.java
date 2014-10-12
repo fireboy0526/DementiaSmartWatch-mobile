@@ -28,7 +28,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
-import com.agileninjas.dementiasmartwatch.R;
+import com.agileninjas.dementiasmartwatch.R2;
 
 public class SendErrorCode implements LocationListener {
 	
