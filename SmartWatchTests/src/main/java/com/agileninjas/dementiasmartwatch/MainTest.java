@@ -2,8 +2,13 @@ package main.java.com.agileninjas.dementiasmartwatch;
 
 //import org.robolectric.shadows.ShadowToast;
 
+<<<<<<< HEAD
 //import com.agileninjas.dementiasmartwatch.Main;
 import com.agileninjas.dementiasmartwatch.R;
+=======
+import com.agileninjas.dementiasmartwatch.Main;
+import main.java.com.agileninjas.dementiasmartwatch.R;
+>>>>>>> FETCH_HEAD
 import com.robotium.solo.Solo;
 
 import android.app.AlertDialog;
