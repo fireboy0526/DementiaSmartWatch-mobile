@@ -59,9 +59,6 @@
                	   <path>${env.ANDROID_HOME}</path>
                    <platform>19</platform>
                </sdk>
-               <emulator>
-                   <avd>MyVirtualDevice</avd>
-               </emulator>
                     <dexOptimize>false</dexOptimize>
                     <dex>
                         <preDex>false</preDex>
