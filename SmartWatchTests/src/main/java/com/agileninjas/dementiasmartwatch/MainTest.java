@@ -3,7 +3,7 @@ package main.java.com.agileninjas.dementiasmartwatch;
 //import org.robolectric.shadows.ShadowToast;
 
 //import com.agileninjas.dementiasmartwatch.Main;
-import main.java.com.agileninjas.dementiasmartwatch.R;
+import com.agileninjas.dementiasmartwatch.R;
 import com.robotium.solo.Solo;
 
 import android.app.AlertDialog;

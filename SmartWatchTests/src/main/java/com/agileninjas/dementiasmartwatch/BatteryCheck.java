@@ -1,6 +1,6 @@
 package main.java.com.agileninjas.dementiasmartwatch;
 
-import main.java.com.agileninjas.dementiasmartwatch.R;
+import com.agileninjas.dementiasmartwatch.R;
 
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;

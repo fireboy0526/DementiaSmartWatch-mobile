@@ -73,11 +73,6 @@
             </configuration>
           <extensions>true</extensions>
         </plugin>
-        <plugin>
-          <groupId>com.google.appengine</groupId>
-          <artifactId>appengine-maven-plugin</artifactId>
-          <version>1.9.12</version>
-        </plugin>
       </plugins>
     </pluginManagement>
   </build>

@@ -17,7 +17,7 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import main.java.com.agileninjas.dementiasmartwatch.R;
+import com.agileninjas.dementiasmartwatch.R;
 
 import android.content.Context;
 import android.location.Criteria;

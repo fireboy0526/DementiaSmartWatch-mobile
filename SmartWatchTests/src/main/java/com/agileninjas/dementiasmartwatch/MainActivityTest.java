@@ -3,7 +3,7 @@ package main.java.com.agileninjas.dementiasmartwatch;
 import com.robotium.solo.Solo;
 
 import main.java.com.agileninjas.dementiasmartwatch.Main;
-import main.java.com.agileninjas.dementiasmartwatch.R;
+import com.agileninjas.dementiasmartwatch.R;
 
 import android.content.Intent;
 import android.content.Context;
