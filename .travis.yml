@@ -36,6 +36,6 @@ script:
   - mvn clean install
   #- mvn clean package -Dmaven.test.skip=true.
   
- notifications:
+notifications:
     email:
-         - fireboy0526@gmail.com
+        - fireboy0526@gmail.com
