@@ -26,12 +26,10 @@ android:
     - sys-img-armeabi-v7a-android-19
     #- sys-img-x86-android-17
 
-    - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
-    - emulator -avd test -no-skin -no-audio -no-window &
-
 before_script:
-    # Make sure the emulator has started before running tests
-    - ./wait_for_emulator
+  - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a
+  - emulator -avd test -no-skin -no-audio -no-window &
+  - android-wait-for-emulator
 
 script:
   #- mvn clean -DskipTests=true install
