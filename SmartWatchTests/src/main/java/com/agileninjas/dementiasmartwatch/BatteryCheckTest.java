@@ -7,10 +7,9 @@ import android.test.AndroidTestCase;
 import java.io.*;  
 
 import main.java.com.agileninjas.dementiasmartwatch.BatteryCheck;
-<<<<<<< HEAD
+
 //import main.java.com.agileninjas.dementiasmartwatch.R;
-=======
->>>>>>> FETCH_HEAD
+
 
 public class BatteryCheckTest extends AndroidTestCase{
 	
