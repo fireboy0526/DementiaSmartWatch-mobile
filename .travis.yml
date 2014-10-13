@@ -35,7 +35,6 @@ script:
   #- mvn clean -DskipTests=true install
   - mvn clean install
   #- mvn clean package -Dmaven.test.skip=true.
-  - mvn -Dtest=MainTest test
   
 notifications:
     email:
