@@ -3,6 +3,8 @@ package com.agileninjas.dementiasmartwatch;
 //import org.robolectric.shadows.ShadowToast;
 
 //import com.agileninjas.dementiasmartwatch.Main;
+import java.util.Locale;
+
 import com.agileninjas.dementiasmartwatch.R;
 
 import com.agileninjas.dementiasmartwatch.Main;
@@ -11,8 +13,10 @@ import com.robotium.solo.Solo;
 
 import android.app.AlertDialog;
 import android.app.Instrumentation.ActivityMonitor;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.res.Configuration;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
 import android.test.ViewAsserts;
@@ -36,6 +40,7 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main>{
 	private ImageButton panicButton;
 	private ImageButton contactButton;
 	private ActivityMonitor mMonitor;
+	private Context mContext;
     
 	public MainTest() {
 		super(Main.class);
@@ -49,6 +54,7 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main>{
 		setActivityInitialTouchMode(true);
 		
 	    mActivity = getActivity();
+	    mContext = mActivity.getBaseContext();
 	    
 		//mTextView =  (TextView)mActivity.findViewById(R.id.fullscreen_content);
 	    
@@ -238,6 +244,26 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main>{
 
 	    //mActivity.finish();
 	    //getInstrumentation().removeMonitor(mMonitor);
+	}
+	
+	@MediumTest
+	public void testChangeLanguage() {
+		Locale locale = null;
+		Configuration config=null;
+		config = mContext.getResources().getConfiguration();
+		locale = new Locale("zh");
+		Locale.setDefault(locale);
+		config.locale = locale;
+		mContext.getResources().updateConfiguration(config, mContext.getResources().getDisplayMetrics());
+	    final View decorView = mActivity.getWindow().getDecorView();
+
+	    ViewAsserts.assertOnScreen(decorView, panicButton);
+
+	    final ViewGroup.LayoutParams layoutParams =
+	    		panicButton.getLayoutParams();
+	    assertNotNull(layoutParams);
+	    assertEquals(layoutParams.width, 100);
+	    assertEquals(layoutParams.height, 100);
 	}
 
 }

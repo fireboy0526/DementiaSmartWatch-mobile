@@ -10,11 +10,13 @@ import android.content.Context;
 import android.test.ActivityUnitTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivityTest extends ActivityUnitTestCase<Main>{
 
     private Intent mStartIntent;
-    private Button mButton;
+    private ImageButton panicButton;
+    private ImageButton contactButton;
     
 	public MainActivityTest() {
 		super(Main.class);
@@ -31,10 +33,12 @@ public class MainActivityTest extends ActivityUnitTestCase<Main>{
     @MediumTest
     public void testPreconditions() {
         startActivity(mStartIntent, null, null);
-        mButton = (Button) getActivity().findViewById(R.id.fullscreen_content_controls);
+        panicButton = (ImageButton) getActivity().findViewById(R.id.fullscreen_content_controls);
+        contactButton = (ImageButton) getActivity().findViewById(R.id.fullscreen_content_controls2);
         
         assertNotNull(getActivity());
-        assertNotNull(mButton);
+        assertNotNull(panicButton);
+        assertNotNull(contactButton);
     }
     
     /**
@@ -44,11 +48,11 @@ public class MainActivityTest extends ActivityUnitTestCase<Main>{
     @MediumTest
     public void testSubLaunch() {
         Main activity = startActivity(mStartIntent, null, null);
-        mButton = (Button) activity.findViewById(R.id.fullscreen_content_controls);
+        panicButton = (ImageButton) activity.findViewById(R.id.fullscreen_content_controls);
         Solo solo = new Solo(getInstrumentation(),getActivity());
         // This test confirms that when you click the button, the activity attempts to open
         // another activity (by calling startActivity) and close itself (by calling finish()).
-        mButton.performClick();
+        panicButton.performClick();
         assertTrue("Could not find the dialog!", solo.searchText("Panic message have been sent."));
         assertNotNull(getStartedActivityIntent());
         assertTrue(isFinishCalled());
