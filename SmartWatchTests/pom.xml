@@ -65,7 +65,9 @@
                	   <path>${env.ANDROID_HOME}</path>
                    <platform>19</platform>
                </sdk>
-
+               <!--emulator>
+                   <avd>MyVirtualDevice</avd>
+               </emulator-->
                     <dexOptimize>false</dexOptimize>
                     <dex>
                         <preDex>false</preDex>
@@ -74,20 +76,24 @@
                <deleteConflictingFiles>true</deleteConflictingFiles>
                <undeployBeforeDeploy>true</undeployBeforeDeploy>
                <test>
-                        <!--<instrumentationPackage>packageName</instrumentationPackage>-->
-                        <!--<instrumentationRunner>className</instrumentationRunner>-->
+                        <instrumentationPackage>com.agileninjas.dementiasmartwatch</instrumentationPackage>
+                        <!--instrumentationRunner>com.agileninjas.dementiasmartwatch.MainTest</instrumentationRunner-->
                         <!--<debug>true|false</debug>-->
                         <!--<coverage>true|false</coverage>-->
                         <!--<logonly>true|false</logonly>  avd-->
                         <!--<testsize>small|medium|large</testsize>-->
                 <testSize>small</testSize>
                 <createReport>true</createReport>
-                        <!--<classes>-->
-                            <!--<class>your.package.name.YourTestClass</class>-->
-                        <!--</classes>-->
-                        <!--<packages>-->
-                            <!--<package>your.package.name</package>-->
-                        <!--</packages>-->
+                        <classes>
+                            <class>com.agileninjas.dementiasmartwatch.BatteryCheckTest</class>
+                            <class>com.agileninjas.dementiasmartwatch.GPSLocationTest</class>
+                            <class>com.agileninjas.dementiasmartwatch.MainActivityTest</class>
+                            <class>com.agileninjas.dementiasmartwatch.MainTest</class>
+                            <class>com.agileninjas.dementiasmartwatch.UniqueIDTest</class>
+                        </classes>
+                        <!--packages>
+                            <package>com.agileninjas.dementiasmartwatch</package>
+                        </packages-->
             </test>
             </configuration>
             <extensions>true</extensions>
@@ -100,6 +106,14 @@
           <target/>
         </configuration>
       </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!--testSourceDirectory>${basedir}/src/main/java/</testSourceDirectory-->
+                    <!--testClassesDirectory>${project.build.directory}/classes/</testClassesDirectory-->
+                </configuration>
+            </plugin>      
     </plugins>
   </build>
   <profiles>
@@ -178,6 +192,11 @@
               <formats>xml,html</formats>
             </configuration>
           </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>2.17</version>
+      </plugin>          
         </plugins>
       </reporting>
     </profile>
