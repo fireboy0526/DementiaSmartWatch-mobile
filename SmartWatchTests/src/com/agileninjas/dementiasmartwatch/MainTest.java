@@ -12,14 +12,17 @@ import com.agileninjas.dementiasmartwatch.R;
 import com.robotium.solo.Solo;
 
 import android.app.AlertDialog;
+import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.res.Configuration;
+import android.os.SystemClock;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
 import android.test.ViewAsserts;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -202,6 +205,15 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main>{
 		
 		getInstrumentation().waitForIdleSync();
 		
+//		long downTime = SystemClock.uptimeMillis();
+//		// event time MUST be retrieved only by this way!
+//		long eventTime = SystemClock.uptimeMillis();
+//		Instrumentation inst = getInstrumentation();
+//		float xStart = 200;
+//		float yStart = 200;
+//		MotionEvent event = MotionEvent.obtain(downTime, eventTime, MotionEvent.ACTION_DOWN, xStart, yStart, 0);
+//		inst.sendPointerSync(event);
+
 	    //TouchUtils.clickView(this, mButton);
 
 	    //mActivity = (Main) mMonitor.waitForActivityWithTimeout(2000);
@@ -212,9 +224,37 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main>{
 		panicButton.performClick();
 	    //dialog.show();
 	    //assertTrue(dialog.isShowing());
-	    
-	    assertTrue("Could not find the dialog!", solo.searchText("Panic message have been sent."));
+		//solo.clickOnImageButton(0);
+		//solo.clickOnImageButton(1);
+	    assertTrue("Could not find the dialog!", solo.searchText("Patient Name:Johnny Bravo\nContact Person:Bunny Runner\nContact Number:0412-345-678"));
         assertTrue("Counld not find the button!", solo.searchButton("OK"));
+
+	    //mActivity.finish();
+	    //getInstrumentation().removeMonitor(mMonitor);
+	}
+	
+	@MediumTest
+	public void testMessageSent() {
+	    //mMonitor = getInstrumentation().addMonitor(Main.class.getName(), null, false);
+
+		Solo solo = new Solo(getInstrumentation(),getActivity());
+		
+		getInstrumentation().waitForIdleSync();
+		
+
+	    //TouchUtils.clickView(this, mButton);
+
+	    //mActivity = (Main) mMonitor.waitForActivityWithTimeout(2000);
+	    //assertNotNull("MyActivity activity not started, activity is null", mActivity);
+       
+	    //AlertDialog dialog = mActivity.getLastDialog(); // I create getLastDialog method in MyActivity class. Its return last created AlertDialog
+		panicButton.setVisibility(View.VISIBLE);
+		panicButton.performClick();
+	    //dialog.show();
+	    //assertTrue(dialog.isShowing());
+		//solo.clickOnImageButton(0);
+		//solo.clickOnImageButton(1);
+	    assertTrue("Could not find the dialog!", solo.searchText("Panic message have been sent."));
 
 	    //mActivity.finish();
 	    //getInstrumentation().removeMonitor(mMonitor);
@@ -255,15 +295,24 @@ public class MainTest extends ActivityInstrumentationTestCase2<Main>{
 		Locale.setDefault(locale);
 		config.locale = locale;
 		mContext.getResources().updateConfiguration(config, mContext.getResources().getDisplayMetrics());
+//	    final View decorView = mActivity.getWindow().getDecorView();
+//
+//	    ViewAsserts.assertOnScreen(decorView, panicButton);
+//
+//	    final ViewGroup.LayoutParams layoutParams =
+//	    		panicButton.getLayoutParams();
+//	    assertNotNull(layoutParams);
+//	    assertEquals(layoutParams.width, 100);
+//	    assertEquals(layoutParams.height, 100);
 	    final View decorView = mActivity.getWindow().getDecorView();
 
-	    ViewAsserts.assertOnScreen(decorView, panicButton);
+	    ViewAsserts.assertOnScreen(decorView, mDigitalClock);
 
 	    final ViewGroup.LayoutParams layoutParams =
-	    		panicButton.getLayoutParams();
+	    		mDigitalClock.getLayoutParams();
 	    assertNotNull(layoutParams);
-	    assertEquals(layoutParams.width, 100);
-	    assertEquals(layoutParams.height, 100);
+	    assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
+	    assertEquals(layoutParams.height,WindowManager.LayoutParams.MATCH_PARENT);
 	}
 
 }
